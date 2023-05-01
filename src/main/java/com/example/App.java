@@ -2,9 +2,14 @@ package com.example;
 
 import java.io.IOException;
 
+import com.example.controllers.GridController;
+import com.example.controllers.LabelController;
+import com.example.models.NonogramBoard;
+import com.example.models.NonogramGenerator;
+import com.example.models.RandomNonogramGenerator;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -13,24 +18,22 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private static Scene scene;
-
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("nonograms"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("nonograms.fxml"));
+        Scene scene = new Scene(loader.load());
+        NonogramGenerator generator = new NonogramGenerator(new RandomNonogramGenerator(10, 10));
+        NonogramBoard nonogramBoard = generator.generate();
+
+        GridController gridController = loader.getController();
+        gridController.initialize(nonogramBoard);
+        
+
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
-    }
 
     public static void main(String[] args) {
         launch();

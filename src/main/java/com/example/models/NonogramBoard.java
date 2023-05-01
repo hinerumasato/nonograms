@@ -1,8 +1,13 @@
 package com.example.models;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class NonogramBoard {
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+
+public class NonogramBoard implements Observable {
 
     private int numRows;
     private int numCols;
@@ -10,6 +15,7 @@ public class NonogramBoard {
     private int[][] rowNumbers;
     private int[][] colNumbers;
     private int[][] board;
+    private List<InvalidationListener> listeners = new ArrayList<InvalidationListener>();
 
     public NonogramBoard(int numRows, int numCols, int[][] rowNumbers, int[][] colNumbers, int[][] board) {
         this.numRows = numRows;
@@ -42,6 +48,8 @@ public class NonogramBoard {
 
     public void setGridState(int row, int col, int value) {
         gridState[row][col] = value;
+        notifyListeners();
+        
     }
 
     public int getGridState(int row, int col) {
@@ -50,13 +58,13 @@ public class NonogramBoard {
 
     public void printRowNumbers() {
         System.out.println("ROW NUMBERS");
-        for(int i = 0; i < rowNumbers.length; i++)
+        for (int i = 0; i < rowNumbers.length; i++)
             System.out.println(Arrays.toString(rowNumbers[i]));
     }
 
     public void printColNumbers() {
         System.out.println("COL NUMBERS");
-        for(int i = 0; i < colNumbers.length; i++)
+        for (int i = 0; i < colNumbers.length; i++)
             System.out.println(Arrays.toString(colNumbers[i]));
     }
 
@@ -66,5 +74,49 @@ public class NonogramBoard {
                 System.out.print(board[i][j] + " ");
             System.out.println();
         }
+    }
+
+    @Override
+    public void addListener(InvalidationListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeListener(InvalidationListener listener) {
+        listeners.remove(listener);
+    }
+
+    public void notifyListeners() {
+        for (InvalidationListener listener : listeners) {
+            listener.invalidated(this);
+        }
+    }
+
+    public void setNumRows(int numRows) {
+        this.numRows = numRows;
+    }
+
+    public void setNumCols(int numCols) {
+        this.numCols = numCols;
+    }
+
+    public void setGridState(int[][] gridState) {
+        this.gridState = gridState;
+    }
+
+    public void setRowNumbers(int[][] rowNumbers) {
+        this.rowNumbers = rowNumbers;
+    }
+
+    public void setColNumbers(int[][] colNumbers) {
+        this.colNumbers = colNumbers;
+    }
+
+    public int[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(int[][] board) {
+        this.board = board;
     }
 }
