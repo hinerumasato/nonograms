@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -9,11 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Button?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="397.0" prefWidth="472.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.controllers.GridController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="514.0" stylesheets="@CSS/nonogram.css" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.views.MainView">
    <children>
-      <VBox layoutX="7.0" layoutY="79.0" prefHeight="319.0" prefWidth="73.0">
+      <VBox layoutX="7.0" layoutY="79.0" prefHeight="313.0" prefWidth="71.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="v_label_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="73.0" text="Label" textAlignment="RIGHT">
                <VBox.margin>
@@ -28,10 +27,10 @@
             <Label fx:id="v_label_7" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="73.0" text="Label" textAlignment="RIGHT" />
             <Label fx:id="v_label_8" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="73.0" text="Label" />
             <Label fx:id="v_label_9" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="73.0" text="Label" />
-            <Label fx:id="v_label_10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="73.0" text="Label" />
+            <Label fx:id="v_label_10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="71.0" text="Label" />
          </children>
       </VBox>
-      <HBox layoutX="76.0" layoutY="11.0" prefHeight="53.0" prefWidth="382.0">
+      <HBox layoutX="80.0" layoutY="26.0" prefHeight="53.0" prefWidth="382.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="h_label_1" prefHeight="61.0" prefWidth="40.0" text="Label" />
             <Label fx:id="h_label_2" prefHeight="61.0" prefWidth="40.0" text="Label" />
@@ -45,7 +44,7 @@
             <Label fx:id="h_label_10" prefHeight="61.0" prefWidth="40.0" text="Label" />
          </children>
       </HBox>
-      <GridPane fx:id="gridPane" layoutX="76.0" layoutY="79.0" prefHeight="313.0" prefWidth="382.0">
+      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="80.0" layoutY="79.0" prefHeight="313.0" prefWidth="382.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -71,5 +70,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
+      <ToggleButton fx:id="toggleButton" layoutX="210.0" layoutY="426.0" mnemonicParsing="false" text="ToggleButton" />
+      <Label fx:id="toggleStateLabel" layoutX="241.0" layoutY="461.0" />
    </children>
 </AnchorPane>

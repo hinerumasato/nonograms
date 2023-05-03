@@ -7,7 +7,7 @@ import java.util.List;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 
-public class NonogramBoard implements Observable {
+public class NonogramBoard implements Observable, InvalidationListener {
 
     private int numRows;
     private int numCols;
@@ -15,6 +15,10 @@ public class NonogramBoard implements Observable {
     private int[][] rowNumbers;
     private int[][] colNumbers;
     private int[][] board;
+    private int currentRow;
+    private int currentCol;
+    private boolean isSquare;
+
     private List<InvalidationListener> listeners = new ArrayList<InvalidationListener>();
 
     public NonogramBoard(int numRows, int numCols, int[][] rowNumbers, int[][] colNumbers, int[][] board) {
@@ -48,8 +52,10 @@ public class NonogramBoard implements Observable {
 
     public void setGridState(int row, int col, int value) {
         gridState[row][col] = value;
+        currentRow = row;
+        currentCol = col;
         notifyListeners();
-        
+
     }
 
     public int getGridState(int row, int col) {
@@ -118,5 +124,45 @@ public class NonogramBoard implements Observable {
 
     public void setBoard(int[][] board) {
         this.board = board;
+    }
+
+    public boolean isSquare() {
+        return isSquare;
+    }
+
+    public void setSquare(boolean isSquare) {
+        this.isSquare = isSquare;
+    }
+
+    public List<InvalidationListener> getListeners() {
+        return listeners;
+    }
+
+    public void setListeners(List<InvalidationListener> listeners) {
+        this.listeners = listeners;
+    }
+
+    @Override
+    public void invalidated(Observable arg0) {
+        if (arg0 instanceof ToggleModel) {
+            ToggleModel toggleModel = (ToggleModel) arg0;
+            setSquare(toggleModel.isOn());
+        }
+    }
+
+    public int getCurrentRow() {
+        return currentRow;
+    }
+
+    public void setCurrentRow(int currentRow) {
+        this.currentRow = currentRow;
+    }
+
+    public int getCurrentCol() {
+        return currentCol;
+    }
+
+    public void setCurrentCol(int currentCol) {
+        this.currentCol = currentCol;
     }
 }
