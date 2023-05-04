@@ -1,6 +1,7 @@
 package com.example;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,13 +17,18 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("nonograms.fxml"));
-        Scene scene = new Scene(loader.load());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("medium.fxml"));
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(getClass().getResource("css/nonogram.css").toURI().toString());
+            stage.setTitle(GAME_TITLE);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
-        stage.setTitle(GAME_TITLE);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
     }
 
 

@@ -1,11 +1,18 @@
-#HBox {
+HBox {
     -fx-border-color: black;
     -fx-border-width: 1px;
 }
 
-#VBox {
-
+VBox {
     -fx-border-color: black;
     -fx-border-width: 1px;
 }
+
+Button {
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+}
+
+
 

@@ -11,133 +11,104 @@ public class NonogramSolver {
         this.board = new int[rowHints.length][colHints.length];
     }
 
-    public boolean solve() {
-        return solve(0, 0);
+    public boolean solveNonogram() {
+        return solveNonogram(0, 0);
     }
 
-    private boolean solve(int row, int col) {
-        if (row == board.length && col == 0) {
-            return true; // đã giải quyết toàn bộ bảng
+    private boolean solveNonogram(int row, int col) {
+        if (row == rowHints.length) {
+            return true;
         }
 
-        if (board[row][col] == 1) {
-            // ô vuông này đã được đánh dấu là đen
-            return solve(col == board.length - 1 ? row + 1 : row, (col + 1) % board.length);
+        if (col == colHints.length) {
+            return solveNonogram(row + 1, 0);
         }
 
-        for (int i = 1; i >= 0; i--) {
-            board[row][col] = i;
-            if (isValid(row, col) && solve(col == board.length - 1 ? row + 1 : row, (col + 1) % board.length)) {
+        for (int value = 0; value <= 1; value++) {
+            board[row][col] = value;
+
+            if (isValidRow(row) && isValidCol(col) && solveNonogram(row, col + 1)) {
                 return true;
             }
         }
 
-        board[row][col] = 0; // quay lui nếu không tìm thấy giải pháp hợp lệ
+        board[row][col] = 0;
         return false;
-    }
-
-    private boolean isValid(int row, int col) {
-        return isValidRow(row) && isValidColumn(col);
     }
 
     private boolean isValidRow(int row) {
         int[] hints = rowHints[row];
-        int index = 0;
-        int count = 0;
+        int[] values = board[row];
 
-        for (int col = 0; col < board.length; col++) {
-            if (board[row][col] == 1) {
-                count++;
-            } else if (count > 0) {
-                if (hints.length <= index || hints[index] != count) {
+        int hintIndex = 0;
+        int valueIndex = 0;
+
+        while (valueIndex < values.length) {
+            if (values[valueIndex] == 1) {
+                int count = 0;
+                while (valueIndex < values.length && values[valueIndex] == 1) {
+                    count++;
+                    valueIndex++;
+                }
+
+                if (hintIndex >= hints.length || count != hints[hintIndex]) {
                     return false;
                 }
-                index++;
-                count = 0;
+                hintIndex++;
+            } else {
+                valueIndex++;
             }
         }
 
-        if (count > 0 && (hints.length <= index || hints[index] != count)) {
-            return false;
-        }
-
-        return true;
+        return hintIndex == hints.length;
     }
 
-    private boolean isValidColumn(int col) {
+    private boolean isValidCol(int col) {
         int[] hints = colHints[col];
-        int index = 0;
-        int count = 0;
+        int[] values = new int[rowHints.length];
 
-        for (int row = 0; row < board.length; row++) {
-            if (board[row][col] == 1) {
-                count++;
-            } else if (count > 0) {
-                if (hints.length <= index || hints[index] != count) {
+        for (int row = 0; row < rowHints.length; row++) {
+            values[row] = board[row][col];
+        }
+
+        int hintIndex = 0;
+        int valueIndex = 0;
+
+        while (valueIndex < values.length) {
+            if (values[valueIndex] == 1) {
+                int count = 0;
+                while (valueIndex < values.length && values[valueIndex] == 1) {
+                    count++;
+                    valueIndex++;
+                }
+
+                if (hintIndex >= hints.length || count != hints[hintIndex]) {
                     return false;
                 }
-                index++;
-                count = 0;
+                hintIndex++;
+            } else {
+                valueIndex++;
             }
         }
 
-        if (count > 0 && (hints.length <= index || hints[index] != count)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public void printSolution() {
-        for (int[] row : board) {
-            for (int cell : row) {
-                System.out.print(cell == 1 ? "#" : ".");
-            }
-            System.out.println();
-        }
+        return hintIndex == hints.length;
     }
 
     public void printBoard() {
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[i].length; j++)
-                System.out.print(board[i][j] + " ");
+        for (int[] row : board) {
+            for (int value : row) {
+                System.out.print(value == 1 ? "#" : ".");
+            }
             System.out.println();
         }
     }
-    
+
     public static void main(String[] args) {
-        int[][] rowHints = {
-            {3, 1},
-            {2, 2},
-            {1, 2, 2},
-            {3, 2},
-            {1, 2},
-            {2, 1},
-            {2, 1},
-            {1, 1},
-            {1, 1},
-            {2, 2}
-        };
-        
-        int[][] colHints = {
-            {2, 1},
-            {1, 1},
-            {1, 3},
-            {1, 3},
-            {3, 1},
-            {2, 2},
-            {2, 2},
-            {2, 2},
-            {1, 1},
-            {2, 1}
-        };
-        
+        int[][] rowHints = {{1, 1}, {3}, {2}, {1}, {3}};
+        int[][] colHints = {{1}, {3}, {2}, {2}, {1}};
         NonogramSolver solver = new NonogramSolver(rowHints, colHints);
-        if (solver.solve()) {
-            solver.printSolution();
-        } else {
-            System.out.println("Không tìm thấy giải pháp");
-        }
-        
+        solver.solveNonogram();
+        solver.printBoard();
     }
+    
 }

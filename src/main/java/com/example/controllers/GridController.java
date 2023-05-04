@@ -34,7 +34,6 @@ public class GridController implements InvalidationListener {
     public void initialize() {
         int row = nonogramBoard.getNumRows();
         int col = nonogramBoard.getNumCols();
-        nonogramBoard.printBoard();
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 final int finalI = i;
@@ -45,17 +44,16 @@ public class GridController implements InvalidationListener {
                 button.setOnAction(event -> {
                     int value = nonogramBoard.isSquare() ? 1 : 0;
                     boolean isCanSetGridState = nonogramBoard.trySetGridState(finalI, finalJ, value);
-                    if(isCanSetGridState)
+                    if (isCanSetGridState)
                         nonogramBoard.setGridState(finalI, finalJ, value);
                     else
                         heartModel.minusOne();
                 });
 
-
                 GridPane.setHgrow(button, Priority.ALWAYS);
                 GridPane.setVgrow(button, Priority.ALWAYS);
 
-                gridPane.add(button, j, i); //Cột trước hàng sau
+                gridPane.add(button, j, i); // Cột trước hàng sau
                 buttons[i][j] = button;
             }
         }
@@ -69,9 +67,15 @@ public class GridController implements InvalidationListener {
             int row = nonogramBoard.getCurrentRow();
             int col = nonogramBoard.getCurrentCol();
 
-            if(isSquare)
-                buttons[row][col].setStyle("-fx-background-color: #000");
-            else buttons[row][col].setStyle("-fx-background-color: red");
+            if (isSquare)
+                buttons[row][col].setStyle("-fx-background-color: #555; -fx-background-clip: padding-box; -fx-padding: 3px");
+            else {
+                buttons[row][col].setStyle(
+                        "-fx-background-image:  url('file:/D:/Projects/Java/JavaFX/nonograms/target/classes/com/example/img/x_mark.png'); " +
+                        "-fx-background-size:  contain; " +
+                        "-fx-background-repeat:  no-repeat; " + 
+                        "-fx-background-position: center");
+            }
         }
     }
 }

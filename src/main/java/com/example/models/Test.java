@@ -5,7 +5,7 @@ public class Test {
         NonogramGenerator generator = new NonogramGenerator(new FileGenerator("target/classes/com/example/maps/map1.txt"));
         NonogramBoard nonogramBoard = generator.generate();
         nonogramBoard.printBoard();
-        nonogramBoard.printRowNumbers();
+        // nonogramBoard.printRowNumbers();
         nonogramBoard.printColNumbers();
     }
 }
