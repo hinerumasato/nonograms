@@ -34,6 +34,7 @@ public class GridController implements InvalidationListener {
     public void initialize() {
         int row = nonogramBoard.getNumRows();
         int col = nonogramBoard.getNumCols();
+        nonogramBoard.printBoard();
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 final int finalI = i;
@@ -54,7 +55,7 @@ public class GridController implements InvalidationListener {
                 GridPane.setHgrow(button, Priority.ALWAYS);
                 GridPane.setVgrow(button, Priority.ALWAYS);
 
-                gridPane.add(button, i, j);
+                gridPane.add(button, j, i); //Cột trước hàng sau
                 buttons[i][j] = button;
             }
         }
