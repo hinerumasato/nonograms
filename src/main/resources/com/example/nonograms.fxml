@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -10,9 +12,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="514.0" stylesheets="@CSS/nonogram.css" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.views.MainView">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="515.0" stylesheets="@CSS/nonogram.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.views.MainView">
    <children>
-      <VBox layoutX="7.0" layoutY="79.0" prefHeight="313.0" prefWidth="71.0" style="-fx-border-color: black;">
+      <VBox layoutX="14.0" layoutY="147.0" prefHeight="313.0" prefWidth="71.0" style="-fx-border-color: black;">
          <children>
             <Label fx:id="v_label_1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="73.0" text="Label" textAlignment="RIGHT">
                <VBox.margin>
@@ -30,21 +32,21 @@
             <Label fx:id="v_label_10" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="32.0" prefWidth="71.0" text="Label" />
          </children>
       </VBox>
-      <HBox layoutX="80.0" layoutY="26.0" prefHeight="53.0" prefWidth="382.0" style="-fx-border-color: black;">
+      <HBox layoutX="86.0" layoutY="93.0" prefHeight="54.0" prefWidth="391.0" style="-fx-border-color: black;">
          <children>
-            <Label fx:id="h_label_1" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_2" prefHeight="61.0" prefWidth="40.0" text="Label" />
+            <Label fx:id="h_label_1" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_2" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
             <Label fx:id="h_label_3" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_4" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_5" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_6" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_7" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_8" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_9" prefHeight="61.0" prefWidth="40.0" text="Label" />
-            <Label fx:id="h_label_10" prefHeight="61.0" prefWidth="40.0" text="Label" />
+            <Label fx:id="h_label_4" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_5" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_6" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_7" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_8" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_9" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
+            <Label fx:id="h_label_10" prefHeight="61.0" prefWidth="40.0" text="Label" textAlignment="CENTER" />
          </children>
       </HBox>
-      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="80.0" layoutY="79.0" prefHeight="313.0" prefWidth="382.0">
+      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="86.0" layoutY="147.0" prefHeight="313.0" prefWidth="382.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -70,7 +72,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <ToggleButton fx:id="toggleButton" layoutX="210.0" layoutY="426.0" mnemonicParsing="false" text="ToggleButton" />
-      <Label fx:id="toggleStateLabel" layoutX="241.0" layoutY="461.0" />
+      <ToggleButton fx:id="toggleButton" layoutX="221.0" layoutY="467.0" mnemonicParsing="false" text="ToggleButton" />
+      <Label fx:id="toggleStateLabel" layoutX="243.0" layoutY="502.0" prefHeight="18.0" prefWidth="42.0" />
+      <ImageView fx:id="imageView1" fitHeight="42.0" fitWidth="46.0" layoutX="200.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView2" fitHeight="42.0" fitWidth="46.0" layoutX="256.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageView3" fitHeight="42.0" fitWidth="46.0" layoutX="310.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/heart.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -127,8 +127,4 @@ public class RandomNonogramGenerator implements NonogramGeneratorBehavior {
             System.out.println();
         }
     }
-
-    public static void main(String[] args) {
-        
-    }
 }

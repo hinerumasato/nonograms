@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.models.HeartModel;
 import com.example.models.NonogramBoard;
 
 import javafx.beans.InvalidationListener;
@@ -11,11 +12,13 @@ import javafx.scene.layout.Priority;
 public class GridController implements InvalidationListener {
     private GridPane gridPane;
     private NonogramBoard nonogramBoard;
+    private HeartModel heartModel;
     private Button[][] buttons;
 
-    public GridController(GridPane gridPane, NonogramBoard nonogramBoard) {
+    public GridController(GridPane gridPane, NonogramBoard nonogramBoard, HeartModel heartModel) {
         this.gridPane = gridPane;
         this.nonogramBoard = nonogramBoard;
+        this.heartModel = heartModel;
         this.buttons = new Button[nonogramBoard.getNumRows()][nonogramBoard.getNumCols()];
         this.nonogramBoard.addListener(this);
     }
@@ -39,7 +42,12 @@ public class GridController implements InvalidationListener {
                 button.setMaxWidth(Double.MAX_VALUE);
                 button.setMaxHeight(Double.MAX_VALUE);
                 button.setOnAction(event -> {
-                    nonogramBoard.setGridState(finalI, finalJ, 1);
+                    int value = nonogramBoard.isSquare() ? 1 : 0;
+                    boolean isCanSetGridState = nonogramBoard.trySetGridState(finalI, finalJ, value);
+                    if(isCanSetGridState)
+                        nonogramBoard.setGridState(finalI, finalJ, value);
+                    else
+                        heartModel.minusOne();
                 });
 
 
