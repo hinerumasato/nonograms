@@ -4,18 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomNonogramGenerator implements NonogramGeneratorBehavior {
-    private int[][] board;
-    private int[][] rowConstraints;
-    private int[][] colConstraints;
-    private int numRows;
-    private int numCols;
+public class RandomGenerator extends Generator implements GeneratorBehavior {
     private Random rand;
 
-    public RandomNonogramGenerator(int numRows, int numCols) {
+    public RandomGenerator(int numRows, int numCols) {
         this.numRows = numRows;
         this.numCols = numCols;
         this.board = new int[numRows][numCols];
+        this.rowConstraints = new int[numRows][];
+        this.colConstraints = new int[numCols][];
+        this.rand = new Random();
+    }
+
+    public RandomGenerator(int numRows, int numCols, int[][] board) {
+        this.numRows = numRows;
+        this.numCols = numCols;
+        this.board = board;
         this.rowConstraints = new int[numRows][];
         this.colConstraints = new int[numCols][];
         this.rand = new Random();
@@ -40,7 +44,7 @@ public class RandomNonogramGenerator implements NonogramGeneratorBehavior {
         }
     }
 
-    private void generateColConstraints() {
+    public void generateColConstraints() {
         for(int i = 0; i < numRows; i++) {
             List<Integer> colConstraint = new ArrayList<Integer>();
             int count = 0;
@@ -71,7 +75,7 @@ public class RandomNonogramGenerator implements NonogramGeneratorBehavior {
         }
     }
 
-    private void generateRowConstraints() {
+    public void generateRowConstraints() {
         for (int i = 0; i < numRows; i++) {
             List<Integer> rowConstraint = new ArrayList<Integer>();
             int count = 0;

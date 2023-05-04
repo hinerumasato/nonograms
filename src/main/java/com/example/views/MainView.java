@@ -4,10 +4,11 @@ import com.example.controllers.GridController;
 import com.example.controllers.ImageViewController;
 import com.example.controllers.LabelController;
 import com.example.controllers.ToggleController;
+import com.example.models.FileGenerator;
 import com.example.models.HeartModel;
 import com.example.models.NonogramBoard;
 import com.example.models.NonogramGenerator;
-import com.example.models.RandomNonogramGenerator;
+import com.example.models.RandomGenerator;
 import com.example.models.ToggleModel;
 
 import javafx.fxml.FXML;
@@ -109,7 +110,7 @@ public class MainView {
     }
 
     public void initialize() {
-        NonogramGenerator generator = new NonogramGenerator(new RandomNonogramGenerator(10, 10));
+        NonogramGenerator generator = new NonogramGenerator(new FileGenerator("target/classes/com/example/maps/map1.txt"));
         NonogramBoard nonogramBoard = generator.generate();
         ToggleModel toggleModel = new ToggleModel(true);
         toggleModel.addListener(nonogramBoard);
