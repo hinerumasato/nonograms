@@ -83,15 +83,15 @@ public class GridController implements InvalidationListener {
 
             if (value == NonogramBoard.SQUARE_VALUE)
                 buttons[row][col]
-                        .setStyle("-fx-background-color: #555; -fx-background-clip: padding-box; -fx-padding: 3px");
+                        .setStyle("-fx-background-color: #555");
             else {
                 try {
-                    String markFilePath = new ImgFile("x_mark").load();
+                    String markFilePath = new ImgFile("x_mark_2").load();
                     buttons[row][col].setStyle(
                             "-fx-background-image:  url('" + markFilePath + "');" +
-                                    "-fx-background-size:  contain; " +
-                                    "-fx-background-repeat:  no-repeat; " +
-                                    "-fx-background-position: center");
+                            "-fx-background-size:  contain; " +
+                            "-fx-background-repeat:  no-repeat; " +
+                            "-fx-background-position: center");
                 }
 
                 catch (Exception e) {
