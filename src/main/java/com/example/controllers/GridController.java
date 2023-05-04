@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.models.HeartModel;
+import com.example.models.ImgFile;
 import com.example.models.NonogramBoard;
 
 import javafx.beans.InvalidationListener;
@@ -70,11 +71,18 @@ public class GridController implements InvalidationListener {
             if (isSquare)
                 buttons[row][col].setStyle("-fx-background-color: #555; -fx-background-clip: padding-box; -fx-padding: 3px");
             else {
-                buttons[row][col].setStyle(
-                        "-fx-background-image:  url('file:/D:/Projects/Java/JavaFX/nonograms/target/classes/com/example/img/x_mark.png'); " +
-                        "-fx-background-size:  contain; " +
-                        "-fx-background-repeat:  no-repeat; " + 
-                        "-fx-background-position: center");
+                try {
+                    String markFilePath = new ImgFile("x_mark").load();
+                    buttons[row][col].setStyle(
+                            "-fx-background-image:  url('" + markFilePath + "');" +
+                            "-fx-background-size:  contain; " +
+                            "-fx-background-repeat:  no-repeat; " + 
+                            "-fx-background-position: center");
+                }
+
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
