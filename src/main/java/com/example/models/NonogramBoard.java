@@ -58,6 +58,12 @@ public class NonogramBoard implements Observable, InvalidationListener {
 
     }
 
+    public boolean trySetGridState(int row, int col, int value) {
+        int[][] tempGridState = gridState.clone();
+        tempGridState[row][col] = value;
+        return tempGridState[row][col] == board[row][col];
+    }
+
     public int getGridState(int row, int col) {
         return gridState[row][col];
     }

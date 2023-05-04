@@ -1,9 +1,7 @@
 package com.example;
 
-import java.io.File;
 import java.io.IOException;
-
-import com.example.views.MainView;
+import java.net.URISyntaxException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,17 +17,18 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("menu.fxml"));
-        Scene scene = new Scene(loader.load());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("medium.fxml"));
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(getClass().getResource("css/nonogram.css").toURI().toString());
+            stage.setTitle(GAME_TITLE);
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
-        MainView mainView = loader.getController();
-        mainView.initialize();
-        
-
-        stage.setTitle(GAME_TITLE);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
     }
 
 

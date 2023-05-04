@@ -1,8 +1,8 @@
 package com.example.models;
 
 public class NonogramGenerator {
-    private NonogramGeneratorBehavior behavior;
-    public NonogramGenerator(NonogramGeneratorBehavior behavior) {
+    private GeneratorBehavior behavior;
+    public NonogramGenerator(GeneratorBehavior behavior) {
         this.behavior = behavior;
     }
 

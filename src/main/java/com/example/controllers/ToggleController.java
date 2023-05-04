@@ -54,12 +54,12 @@ public class ToggleController implements InvalidationListener {
     }
 
     @Override
-    public void invalidated(Observable arg0) {
-        if(arg0 instanceof ToggleModel) {
-            ToggleModel model = (ToggleModel) arg0;
+    public void invalidated(Observable observable) {
+        if(observable instanceof ToggleModel) {
+            ToggleModel model = (ToggleModel) observable;
             if(model.isOn())
-                toggleStateLabel.setText("IS ON");
-            else toggleStateLabel.setText("IS OFF");
+                toggleStateLabel.setText("ĐANG TÔ MÀU");
+            else toggleStateLabel.setText("ĐANG ĐÁNH DẤU");
         }
     }
 

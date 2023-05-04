@@ -1,5 +1,5 @@
 package com.example.models;
 
-public interface NonogramGeneratorBehavior {
+public interface GeneratorBehavior {
     public NonogramBoard generate();
 }
