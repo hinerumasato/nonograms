@@ -1,6 +1,7 @@
 package com.example.models;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,8 +17,11 @@ public class FileGenerator extends Generator implements GeneratorBehavior {
     @Override
     public NonogramBoard generate() {
         try {
-            File file = new File(mapPath);
+            
+            URI uri = new URI(mapPath);
+            File file = new File(uri.getPath());
             Scanner scanner = new Scanner(file);
+            
             
             List<int[]> boardList = new ArrayList<int[]>();
             while(scanner.hasNextLine()) {

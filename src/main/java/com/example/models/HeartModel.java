@@ -37,7 +37,6 @@ public class HeartModel implements Observable {
         int newValue = this.getQuantity();
         hearts[newValue] = heartOutlineUrl;
         notifyAllListeners();
-        System.out.println(Arrays.toString(hearts));
     }
 
     public String[] getHearts() {
