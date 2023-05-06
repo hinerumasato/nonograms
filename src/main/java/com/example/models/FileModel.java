@@ -10,14 +10,18 @@ public abstract class FileModel {
 
     public FileModel(String fileName) {
         this.fileName = fileName;
-        this.path = "target/classes/com/example";
+        this.path = "src/main/resources/com/example";
     }
 
-    public String load() throws Exception {
+    public String load() {
         String realPath = path + "/" + folderName + "/"  + fileName + extension;
         File file = new File(realPath);
         if(!file.exists())
-            throw new Exception("No found File !!");
+            try {
+                throw new Exception("No found File !!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         return file.toURI().toString();
     }
     
