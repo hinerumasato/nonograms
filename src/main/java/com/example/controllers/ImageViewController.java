@@ -22,7 +22,6 @@ public class ImageViewController implements InvalidationListener {
     }
 
     private void renderImageView() {
-        System.out.println(heartModel.getHearts().length);
         for(int i = 0; i < heartModel.getHearts().length; i++) {
             imageViews[i].setImage(new Image(heartModel.getHeartImageAt(i)));
         }

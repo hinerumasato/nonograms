@@ -1,8 +1,6 @@
 package com.example.models;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javafx.beans.InvalidationListener;
@@ -10,8 +8,8 @@ import javafx.beans.Observable;
 
 public class HeartModel implements Observable {
     public static final int DEFAULT_QUANTITY = 3;
-    private String heartFillUrl = new File("target/classes/com/example/img/heart.png").toURI().toString();
-    private String heartOutlineUrl = new File("target/classes/com/example/img/heart_outline.png").toURI().toString();
+    private String heartFillUrl = new ImgFile("heart").load();
+    private String heartOutlineUrl = new ImgFile("heart_outline").load();
     private int quantity;
     private String[] hearts;
     private List<InvalidationListener> listeners = new ArrayList<InvalidationListener>();
@@ -37,7 +35,6 @@ public class HeartModel implements Observable {
         int newValue = this.getQuantity();
         hearts[newValue] = heartOutlineUrl;
         notifyAllListeners();
-        System.out.println(Arrays.toString(hearts));
     }
 
     public String[] getHearts() {

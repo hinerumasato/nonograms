@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox spacing="10" alignment="CENTER">
+        <Label text="Select Difficulty"/>
+        <ComboBox fx:id="difficultyComboBox" promptText="Choose difficulty level">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Easy"/>
+                    <String fx:value="Medium"/>
+                    <String fx:value="Hard"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Button text="Start Game" onAction="#startGame"/>
+        <Button text="Load Game" onAction="#loadGame"/>
+        <Label fx:id="statusLabel"/>
+    </VBox>
+</AnchorPane>

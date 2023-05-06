@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.models.HeartModel;
+import com.example.models.ImgFile;
 import com.example.models.NonogramBoard;
 
 import javafx.beans.InvalidationListener;
@@ -31,23 +32,36 @@ public class GridController implements InvalidationListener {
         this.nonogramBoard = nonogramBoard;
     }
 
+    private void buttonHandle(int row, int col) {
+        int value = nonogramBoard.isSquare() ? NonogramBoard.SQUARE_VALUE : NonogramBoard.MARK_VALUE;
+        boolean isCanSetGridState = nonogramBoard.trySetGridState(row, col, value);
+        if (isCanSetGridState) {
+            nonogramBoard.setGridState(row, col, value);
+            if (nonogramBoard.isRowFullSquare(row))
+                nonogramBoard.markFullRow(row);
+
+            if (nonogramBoard.isColFullSquare(col))
+                nonogramBoard.markFullCol(col);
+        } else {
+            int realCellValue = nonogramBoard.getBoard()[row][col];
+            nonogramBoard.setGridState(row, col, realCellValue);
+            heartModel.minusOne();
+        }
+    }
+
     public void initialize() {
-        int row = nonogramBoard.getNumRows();
-        int col = nonogramBoard.getNumCols();
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                final int finalI = i;
-                final int finalJ = j;
+        int numRow = nonogramBoard.getNumRows();
+        int numCol = nonogramBoard.getNumCols();
+        for (int i = 0; i < numRow; i++) {
+            for (int j = 0; j < numCol; j++) {
+                final int row = i;
+                final int col = j;
                 Button button = new Button();
                 button.setMaxWidth(Double.MAX_VALUE);
                 button.setMaxHeight(Double.MAX_VALUE);
-                button.setOnAction(event -> {
-                    int value = nonogramBoard.isSquare() ? 1 : 0;
-                    boolean isCanSetGridState = nonogramBoard.trySetGridState(finalI, finalJ, value);
-                    if (isCanSetGridState)
-                        nonogramBoard.setGridState(finalI, finalJ, value);
-                    else
-                        heartModel.minusOne();
+
+                button.setOnMousePressed(event -> {
+                    buttonHandle(row, col);
                 });
 
                 GridPane.setHgrow(button, Priority.ALWAYS);
@@ -63,18 +77,26 @@ public class GridController implements InvalidationListener {
     public void invalidated(Observable observable) {
         if (observable instanceof NonogramBoard) {
             NonogramBoard board = (NonogramBoard) observable;
-            boolean isSquare = board.isSquare();
-            int row = nonogramBoard.getCurrentRow();
-            int col = nonogramBoard.getCurrentCol();
+            int row = board.getCurrentRow();
+            int col = board.getCurrentCol();
+            int value = board.getBoard()[row][col];
 
-            if (isSquare)
-                buttons[row][col].setStyle("-fx-background-color: #555; -fx-background-clip: padding-box; -fx-padding: 3px");
+            if (value == NonogramBoard.SQUARE_VALUE)
+                buttons[row][col]
+                        .setStyle("-fx-background-color: #555");
             else {
-                buttons[row][col].setStyle(
-                        "-fx-background-image:  url('file:/D:/Projects/Java/JavaFX/nonograms/target/classes/com/example/img/x_mark.png'); " +
-                        "-fx-background-size:  contain; " +
-                        "-fx-background-repeat:  no-repeat; " + 
-                        "-fx-background-position: center");
+                try {
+                    String markFilePath = new ImgFile("x_mark_2").load();
+                    buttons[row][col].setStyle(
+                            "-fx-background-image:  url('" + markFilePath + "');" +
+                            "-fx-background-size:  contain; " +
+                            "-fx-background-repeat:  no-repeat; " +
+                            "-fx-background-position: center");
+                }
+
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
