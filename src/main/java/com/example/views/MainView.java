@@ -111,7 +111,7 @@ public class MainView {
 
     public void initialize() {
         try {
-            NonogramGenerator generator = new NonogramGenerator(new FileGenerator(new MapFile("map3").load()));
+            NonogramGenerator generator = new NonogramGenerator(new FileGenerator(new MapFile("map15").load()));
             NonogramBoard nonogramBoard = generator.generate();
             ToggleModel toggleModel = new ToggleModel(true);
             toggleModel.addListener(nonogramBoard);
