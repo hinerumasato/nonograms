@@ -3,10 +3,14 @@ package com.example;
 import java.io.IOException;
 
 import com.example.models.CSSFile;
+import com.example.models.FXMLFile;
+import com.example.models.ImgFile;
+import com.example.views.TestView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -19,12 +23,13 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("medium.fxml"));
+            FXMLLoader loader = new FXMLLoader(new FXMLFile("menu").URLLoad());
             Scene scene = new Scene(loader.load());
-            scene.getStylesheets().add(new CSSFile("nonogram").load());
+            scene.getStylesheets().add(new CSSFile("menu").load());
+            stage.getIcons().add(new Image(new ImgFile("app-icon").load()));
             stage.setTitle(GAME_TITLE);
             stage.setScene(scene);
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();

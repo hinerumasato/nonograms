@@ -1,6 +1,10 @@
 package com.example.models;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 
 public abstract class FileModel {
     protected String fileName;
@@ -13,16 +17,33 @@ public abstract class FileModel {
         this.path = "src/main/resources/com/example";
     }
 
-    public String load() {
-        String realPath = path + "/" + folderName + "/"  + fileName + extension;
+    private File findFile() {
+        String realPath = path + "/" + folderName + "/" + fileName + extension;
         File file = new File(realPath);
-        if(!file.exists())
+        if (!file.exists())
             try {
-                throw new Exception("No found File !!");
+                throw new IOException("No found File !!");
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        return file.toURI().toString();
+        return file;
     }
-    
+
+    public URI URILoad() {
+        return findFile().toURI();
+    }
+
+    public String load() {
+        return findFile().toURI().toString();
+    }
+
+    public URL URLLoad() {
+        try {
+            return findFile().toURL();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
