@@ -39,7 +39,7 @@ public abstract class FileModel {
 
     public URL URLLoad() {
         try {
-            return findFile().toURL();
+            return findFile().toURI().toURL();
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
