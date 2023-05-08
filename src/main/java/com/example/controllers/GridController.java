@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.App;
 import com.example.models.HeartModel;
 import com.example.models.ImgFile;
 import com.example.models.NonogramBoard;
@@ -50,6 +51,7 @@ public class GridController implements InvalidationListener {
     }
 
     public void initialize() {
+        gridPane.setPrefSize(App.GRID_WIDTH, App.GRID_HEIGHT);
         int numRow = nonogramBoard.getNumRows();
         int numCol = nonogramBoard.getNumCols();
         for (int i = 0; i < numRow; i++) {
@@ -57,8 +59,7 @@ public class GridController implements InvalidationListener {
                 final int row = i;
                 final int col = j;
                 Button button = new Button();
-                button.setMaxWidth(Double.MAX_VALUE);
-                button.setMaxHeight(Double.MAX_VALUE);
+                button.setPrefSize(App.GRID_WIDTH / numRow, App.GRID_HEIGHT / numCol);
 
                 button.setOnMousePressed(event -> {
                     buttonHandle(row, col);
@@ -66,7 +67,6 @@ public class GridController implements InvalidationListener {
 
                 GridPane.setHgrow(button, Priority.ALWAYS);
                 GridPane.setVgrow(button, Priority.ALWAYS);
-
                 gridPane.add(button, j, i); // Cột trước hàng sau
                 buttons[i][j] = button;
             }
