@@ -9,6 +9,7 @@ import com.example.models.HeartModel;
 import com.example.models.MapFile;
 import com.example.models.NonogramBoard;
 import com.example.models.NonogramGenerator;
+import com.example.models.RandomGenerator;
 import com.example.models.ToggleModel;
 
 import javafx.fxml.FXML;
@@ -111,7 +112,8 @@ public class MainView {
 
     public void initialize() {
         try {
-            NonogramGenerator generator = new NonogramGenerator(new FileGenerator(new MapFile("map15").load()));
+            NonogramGenerator generator = new NonogramGenerator(new FileGenerator(new MapFile("map6").load()));
+            // NonogramGenerator generator = new NonogramGenerator(new RandomGenerator(10, 10));
             NonogramBoard nonogramBoard = generator.generate();
             ToggleModel toggleModel = new ToggleModel(true);
             toggleModel.addListener(nonogramBoard);
