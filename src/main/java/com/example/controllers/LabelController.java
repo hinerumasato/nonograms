@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 
 public class LabelController {
     
-
     private NonogramBoard nonogramBoard;
     private Label[] v_labels;
     private Label[] h_labels;

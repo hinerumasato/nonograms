@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
 import com.example.models.ImgFile;
-import com.example.views.TestView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,9 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
 
-    private static final String GAME_TITLE = "NONOGRAM";
+    public static final String GAME_TITLE = "NONOGRAM";
+    public static final int GRID_WIDTH     = 290;
+    public static final int GRID_HEIGHT    = 290;
 
     @Override
     public void start(Stage stage) throws IOException {
