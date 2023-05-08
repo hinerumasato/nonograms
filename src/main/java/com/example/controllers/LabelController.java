@@ -21,8 +21,8 @@ public class LabelController {
     public void initialize() {
         int[][] rowRules = nonogramBoard.getRowNumbers();
         int[][] colRules = nonogramBoard.getColNumbers();
-        generateHLabels(h_labels, rowRules);
-        generateVLabels(v_labels, colRules);
+        generateHLabels(h_labels, colRules);
+        generateVLabels(v_labels, rowRules);
     }
 
     private void generateVLabels(Label[] labels, int[][] rules) {

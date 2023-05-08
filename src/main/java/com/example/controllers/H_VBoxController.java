@@ -13,8 +13,8 @@ public class H_VBoxController {
     public H_VBoxController(HBox hBox, VBox vBox) {
         this.hBox = hBox;
         this.vBox = vBox;
-        hBox.setPrefSize(App.GRID_SIZE, App.GRID_SIZE);
-        vBox.setPrefSize(App.GRID_SIZE, App.GRID_SIZE);
+        this.hBox.setPrefWidth(App.GRID_SIZE);
+        this.vBox.setPrefHeight(App.GRID_SIZE);
     }
 
     public void addHBoxLabels(Label[] labels) {

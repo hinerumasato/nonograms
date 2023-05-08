@@ -54,6 +54,8 @@ public class GridController implements InvalidationListener {
         gridPane.setPrefSize(App.GRID_SIZE, App.GRID_SIZE);
         int numRow = nonogramBoard.getNumRows();
         int numCol = nonogramBoard.getNumCols();
+        nonogramBoard.printRowNumbers();
+        nonogramBoard.printColNumbers();
         for (int i = 0; i < numRow; i++) {
             for (int j = 0; j < numCol; j++) {
                 final int row = i;
