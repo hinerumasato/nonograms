@@ -51,7 +51,7 @@ public class GridController implements InvalidationListener {
     }
 
     public void initialize() {
-        gridPane.setPrefSize(App.GRID_WIDTH, App.GRID_HEIGHT);
+        gridPane.setPrefSize(App.GRID_SIZE, App.GRID_SIZE);
         int numRow = nonogramBoard.getNumRows();
         int numCol = nonogramBoard.getNumCols();
         for (int i = 0; i < numRow; i++) {
@@ -59,7 +59,8 @@ public class GridController implements InvalidationListener {
                 final int row = i;
                 final int col = j;
                 Button button = new Button();
-                button.setPrefSize(App.GRID_WIDTH / numRow, App.GRID_HEIGHT / numCol);
+                button.setPrefSize(App.GRID_SIZE / (double)numRow, App.GRID_SIZE / (double)numCol);
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 
                 button.setOnMousePressed(event -> {
                     buttonHandle(row, col);

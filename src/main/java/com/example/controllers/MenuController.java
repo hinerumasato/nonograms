@@ -2,9 +2,11 @@ package com.example.controllers;
 
 import java.io.IOException;
 
+import com.example.App;
 import com.example.models.FXMLFile;
 import com.example.models.ImgFile;
 import com.example.models.LevelModel;
+import com.example.views.GameView;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,12 +28,22 @@ public class MenuController {
     private void loadGame(LevelModel level) {
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(new FXMLFile(level.getLevel()).URLLoad());
-            Scene scene = new Scene(loader.load());
+            FXMLLoader loader = new FXMLLoader(new FXMLFile("game").URLLoad());
+
+            if(level.equals(LevelModel.HARD))
+                App.setGRID_SIZE(420);
+            else App.setGRID_SIZE(290);
+            
+            GameView gameViewController = new GameView();
+            gameViewController.setLevelModel(level);
+            loader.setController(gameViewController);
+
+            Scene scene = new Scene(loader.load(), App.APP_SIZE, App.APP_SIZE);
+
 
             stage.setScene(scene);
             stage.getIcons().add(new Image(new ImgFile("app-icon").load()));
-            stage.setResizable(false);
+            stage.setResizable(true);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,18 +1,17 @@
 package com.example.models;
 
 public enum LevelModel {
-    EASY("easy"),
-    MEDIUM("medium"),
-    HARD("hard"),
-    CUSTOM("custom");
+    EASY(5),
+    MEDIUM(10),
+    HARD(15);
 
-    private final String level;
+    private final int size;
 
-    LevelModel(String level) {
-        this.level = level;
+    LevelModel(int size) {
+        this.size = size;
     }
 
-    public String getLevel() {
-        return this.level;
+    public int getSize() {
+        return this.size;
     }
 }
