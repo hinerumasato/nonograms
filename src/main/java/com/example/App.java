@@ -5,8 +5,6 @@ import java.io.IOException;
 import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
 import com.example.models.ImgFile;
-import com.example.models.LevelModel;
-import com.example.views.GameView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

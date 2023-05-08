@@ -4,44 +4,39 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="668.0" stylesheets="@CSS/nonogram.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="hBox" layoutX="216.0" layoutY="129.0" prefHeight="55.0" prefWidth="290.0">
-
-      </HBox>
-      <VBox fx:id="vBox" layoutX="147.0" layoutY="184.0" prefHeight="289.0" prefWidth="69.0">
-
-      </VBox>
-      <Label layoutX="243.0" layoutY="32.0" prefHeight="17.0" prefWidth="182.0" text="Nonogram">
+      <HBox fx:id="hBox" layoutX="226.0" layoutY="139.0" prefHeight="55.0" prefWidth="290.0" />
+      <VBox fx:id="vBox" layoutX="157.0" layoutY="194.0" prefHeight="289.0" prefWidth="69.0" />
+      <Label layoutX="253.0" layoutY="42.0" prefHeight="17.0" prefWidth="182.0" text="Nonogram">
          <font>
             <Font name="System Bold Italic" size="33.0" />
          </font>
       </Label>
-      <ImageView fx:id="imageView1" fitHeight="34.0" fitWidth="59.0" layoutX="252.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView1" fitHeight="34.0" fitWidth="59.0" layoutX="262.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/heart.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageView2" fitHeight="34.0" fitWidth="59.0" layoutX="308.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView2" fitHeight="34.0" fitWidth="59.0" layoutX="318.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/heart.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageView3" fitHeight="34.0" fitWidth="59.0" layoutX="361.0" layoutY="81.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageView3" fitHeight="34.0" fitWidth="59.0" layoutX="371.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/heart.png" />
          </image>
       </ImageView>
-      <ToggleButton fx:id="toggleButton" layoutX="303.0" layoutY="494.0" mnemonicParsing="false" text="Chuyển Đổi" />
-      <Label fx:id="toggleStateLabel" layoutX="303.0" layoutY="531.0" prefHeight="25.0" prefWidth="133.0" text="Label" textAlignment="CENTER" />
-      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="216.0" layoutY="184.0" prefHeight="290.0" prefWidth="290.0">
-
-      </GridPane>
+      <ToggleButton fx:id="toggleButton" layoutX="313.0" layoutY="504.0" mnemonicParsing="false" text="Chuyển Đổi" AnchorPane.bottomAnchor="71.4" AnchorPane.rightAnchor="277.4" />
+      <Label fx:id="toggleStateLabel" layoutX="313.0" layoutY="541.0" prefHeight="25.0" prefWidth="133.0" text="Label" textAlignment="CENTER" AnchorPane.bottomAnchor="34.4" AnchorPane.rightAnchor="221.4" />
+      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="226.0" layoutY="194.0" prefHeight="290.0" prefWidth="290.0" />
    </children>
-</Pane>
+</AnchorPane>

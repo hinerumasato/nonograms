@@ -3,6 +3,7 @@ package com.example.controllers;
 import java.io.IOException;
 
 import com.example.App;
+import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
 import com.example.models.ImgFile;
 import com.example.models.LevelModel;
@@ -39,6 +40,7 @@ public class MenuController {
             loader.setController(gameViewController);
 
             Scene scene = new Scene(loader.load(), App.APP_SIZE, App.APP_SIZE);
+            scene.getStylesheets().add(new CSSFile("nonogram").load());
 
 
             stage.setScene(scene);
