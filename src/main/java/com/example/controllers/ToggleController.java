@@ -2,13 +2,10 @@ package com.example.controllers;
 
 import com.example.models.ToggleModel;
 
-import javafx.animation.Animation;
-import javafx.animation.ScaleTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.util.Duration;
 
 public class ToggleController implements InvalidationListener {
     private ToggleModel toggleModel;
