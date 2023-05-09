@@ -37,6 +37,17 @@ public class HeartModel implements Observable {
         notifyAllListeners();
     }
 
+    public void reinitialize() {
+        setQuantity(DEFAULT_QUANTITY);
+        for (int i = 0; i < hearts.length; i++)
+            hearts[i] = heartFillUrl;
+        notifyAllListeners();
+    }
+
+    public boolean checkLoseGame() {
+        return getQuantity() == 0;
+    }
+
     public String[] getHearts() {
         return hearts;
     }

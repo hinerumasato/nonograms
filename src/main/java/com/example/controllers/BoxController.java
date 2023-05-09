@@ -6,11 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class H_VBoxController {
+public class BoxController {
     private HBox hBox;
     private VBox vBox;
 
-    public H_VBoxController(HBox hBox, VBox vBox) {
+    public BoxController(HBox hBox, VBox vBox) {
         this.hBox = hBox;
         this.vBox = vBox;
         this.hBox.setPrefWidth(App.GRID_SIZE);

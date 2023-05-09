@@ -16,9 +16,11 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MenuController {
+
     private Button easyButton;
     private Button mediumButton;
     private Button hardButton;
+    private Stage gameStage;
 
     public MenuController(Button easyButton, Button mediumButton, Button hardButton) {
         this.easyButton = easyButton;
@@ -26,9 +28,13 @@ public class MenuController {
         this.hardButton = hardButton;
     }
 
+    public void closeGame() {
+        gameStage.close();
+    }
+
     private void loadGame(LevelModel level) {
         try {
-            Stage stage = new Stage();
+            gameStage = new Stage();
             FXMLLoader loader = new FXMLLoader(new FXMLFile("game").URLLoad());
 
             if(level.equals(LevelModel.HARD))
@@ -37,16 +43,18 @@ public class MenuController {
             
             GameView gameViewController = new GameView();
             gameViewController.setLevelModel(level);
+            gameViewController.setMenuController(this);
             loader.setController(gameViewController);
 
             Scene scene = new Scene(loader.load(), App.APP_SIZE, App.APP_SIZE);
             scene.getStylesheets().add(new CSSFile("nonogram").load());
 
 
-            stage.setScene(scene);
-            stage.getIcons().add(new Image(new ImgFile("app-icon").load()));
-            stage.setResizable(true);
-            stage.show();
+            gameStage.setScene(scene);
+            gameStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
+            gameStage.setResizable(true);
+            gameStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

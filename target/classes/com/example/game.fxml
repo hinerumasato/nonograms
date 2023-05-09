@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="668.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="hBox" layoutX="226.0" layoutY="98.0" prefHeight="97.0" prefWidth="290.0" />
-      <VBox fx:id="vBox" layoutX="157.0" layoutY="194.0" prefHeight="289.0" prefWidth="69.0" />
+      <HBox fx:id="hBox" layoutX="143.0" layoutY="98.0" prefHeight="97.0" prefWidth="290.0" />
+      <VBox fx:id="vBox" layoutX="53.0" layoutY="193.0" prefHeight="290.0" prefWidth="90.0" />
       <ImageView fx:id="imageView1" fitHeight="34.0" fitWidth="59.0" layoutX="272.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/heart.png" />
@@ -27,8 +27,8 @@
             <Image url="@img/heart.png" />
          </image>
       </ImageView>
-      <ToggleButton fx:id="toggleButton" layoutX="313.0" layoutY="499.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-border-radius: 20;" AnchorPane.bottomAnchor="62.0" AnchorPane.rightAnchor="263.0" />
-      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="226.0" layoutY="194.0" prefHeight="290.0" prefWidth="290.0" />
+      <ToggleButton fx:id="toggleButton" layoutX="217.0" layoutY="498.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="143.0" style="-fx-border-radius: 20;" AnchorPane.bottomAnchor="63.0" AnchorPane.rightAnchor="299.8" />
+      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="143.0" layoutY="193.0" prefHeight="290.0" prefWidth="290.0" />
       <ImageView fitHeight="121.0" fitWidth="290.0" layoutX="196.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/title.png" />

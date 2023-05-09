@@ -1,5 +1,7 @@
 package com.example.controllers;
 
+import java.util.Optional;
+
 import com.example.App;
 import com.example.models.BorderWidth;
 import com.example.models.HeartModel;
@@ -8,7 +10,11 @@ import com.example.models.NonogramBoard;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
@@ -18,11 +24,14 @@ public class GridController implements InvalidationListener {
     private HeartModel heartModel;
     private Button[][] buttons;
 
-    public GridController(GridPane gridPane, NonogramBoard nonogramBoard, HeartModel heartModel) {
+    private MenuController menuController;
+
+    public GridController(GridPane gridPane, NonogramBoard nonogramBoard, HeartModel heartModel, MenuController menuController) {
         this.gridPane = gridPane;
         this.nonogramBoard = nonogramBoard;
         this.heartModel = heartModel;
         this.buttons = new Button[nonogramBoard.getNumRows()][nonogramBoard.getNumCols()];
+        this.menuController = menuController;
         this.nonogramBoard.addListener(this);
     }
 
@@ -55,7 +64,9 @@ public class GridController implements InvalidationListener {
         button.setBorder(borderModel.getBorder());
     }
 
-    private void initializeButtonBorder(Button button, int row, int col) {
+    private void initializeGridButton(Button button, int row, int col) {
+        String noBackgroundStyle = "-fx-background-color: #fff";
+        button.setStyle(noBackgroundStyle);
         if (row == 0 && col == 0)
             setButtonBorder(button, BorderWidth.FULL);
         else if (row == 0)
@@ -64,6 +75,35 @@ public class GridController implements InvalidationListener {
             setButtonBorder(button, BorderWidth.RIGHT_BOTTOM_LEFT);
         else
             setButtonBorder(button, BorderWidth.BOTTOM_RIGHT);
+    }
+
+    private boolean isWin() {
+        return nonogramBoard.checkWinGame();
+    }
+
+    private boolean isOver() {
+        return heartModel.checkLoseGame();
+    }
+
+    public void reinitializeGame() {
+        nonogramBoard.reinitGridState();
+        heartModel.reinitialize();
+    }
+
+    private void showDialog(String title, String headerText, String contentText) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+
+        ButtonType playAgainButton = new ButtonType("Chơi lại", ButtonData.YES);
+        ButtonType exitButton = new ButtonType("Thoát", ButtonData.NO);
+
+        alert.getButtonTypes().setAll(playAgainButton, exitButton);
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get().equals(playAgainButton))
+            reinitializeGame();
+        else menuController.closeGame();
     }
 
     public void initialize() {
@@ -77,10 +117,14 @@ public class GridController implements InvalidationListener {
                 Button button = new Button();
                 button.setPrefSize(App.GRID_SIZE / (double) numRow, App.GRID_SIZE / (double) numCol);
                 button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                initializeButtonBorder(button, row, col);
+                initializeGridButton(button, row, col);
 
                 button.setOnMousePressed(event -> {
                     buttonHandle(row, col);
+                    if(isWin())
+                        showDialog("Chúc Mừng !!!", "Bạn đã thắng trò chơi", "Bạn có muốn chơi lại?");
+                    if(isOver())
+                        showDialog("Rất tiếc !!!", "Bạn đã hết số lần chơi", "Bạn có muốn chơi lại?");
                 });
 
                 GridPane.setHgrow(button, Priority.ALWAYS);
@@ -97,12 +141,12 @@ public class GridController implements InvalidationListener {
             NonogramBoard board = (NonogramBoard) observable;
             int row = board.getCurrentRow();
             int col = board.getCurrentCol();
-            int value = board.getBoard()[row][col];
+            int value = board.getGridState()[row][col];
 
             if (value == NonogramBoard.SQUARE_VALUE)
                 buttons[row][col]
                         .setStyle("-fx-background-color: #555");
-            else {
+            else if(value == NonogramBoard.MARK_VALUE) {
                 try {
                     String markFilePath = new ImgFile("x_mark_2").load();
                     buttons[row][col].setStyle(
@@ -115,6 +159,10 @@ public class GridController implements InvalidationListener {
                 catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+
+            else {
+                initializeGridButton(buttons[row][col], row, col);
             }
         }
     }

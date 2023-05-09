@@ -1,9 +1,10 @@
 package com.example.views;
 
 import com.example.controllers.GridController;
-import com.example.controllers.H_VBoxController;
+import com.example.controllers.BoxController;
 import com.example.controllers.ImageViewController;
 import com.example.controllers.LabelController;
+import com.example.controllers.MenuController;
 import com.example.controllers.ToggleController;
 import com.example.models.HeartModel;
 import com.example.models.LevelModel;
@@ -47,9 +48,10 @@ public class GameView {
     private ToggleController toggleController;
     private GridController gridController;
     private ImageViewController imageViewController;
-    private H_VBoxController h_VBoxController;
+    private BoxController boxController;
+    private MenuController menuController;
+    
     private NonogramBoard nonogramBoard;
-
     private HeartModel heartModel;
     private ToggleModel toggleModel;
     private LevelModel level;
@@ -68,17 +70,17 @@ public class GameView {
             Label[] h_Labels = new Label[level.getSize()];
 
             this.toggleController = new ToggleController(toggleModel, toggleButton);
-            this.gridController = new GridController(gridPane, nonogramBoard, heartModel);
+            this.gridController = new GridController(gridPane, nonogramBoard, heartModel, menuController);
             this.imageViewController = new ImageViewController(heartModel, imageViews);
             this.labelController = new LabelController(nonogramBoard, v_Labels, h_Labels);
-            this.h_VBoxController = new H_VBoxController(hBox, vBox);
+            this.boxController = new BoxController(hBox, vBox);
 
             toggleController.initialize();
             gridController.initialize();
             imageViewController.initialize();
             labelController.initialize();
-            h_VBoxController.addHBoxLabels(h_Labels);
-            h_VBoxController.addVBoxLabels(v_Labels);
+            boxController.addHBoxLabels(h_Labels);
+            boxController.addVBoxLabels(v_Labels);
         }
 
         catch (Exception e) {
@@ -86,6 +88,10 @@ public class GameView {
         }
     }
 
+    public void setMenuController(MenuController menuController) {
+        this.menuController = menuController;
+    }
+    
     public void setLevelModel(LevelModel level) {
         this.level = level;
     }
