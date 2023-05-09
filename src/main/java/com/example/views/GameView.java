@@ -29,9 +29,6 @@ public class GameView {
     private ToggleButton toggleButton;
 
     @FXML
-    private Label toggleStateLabel;
-
-    @FXML
     private ImageView imageView1;
 
     @FXML
@@ -70,7 +67,7 @@ public class GameView {
             Label[] v_Labels = new Label[level.getSize()];
             Label[] h_Labels = new Label[level.getSize()];
 
-            this.toggleController = new ToggleController(toggleModel, toggleButton, toggleStateLabel);
+            this.toggleController = new ToggleController(toggleModel, toggleButton);
             this.gridController = new GridController(gridPane, nonogramBoard, heartModel);
             this.imageViewController = new ImageViewController(heartModel, imageViews);
             this.labelController = new LabelController(nonogramBoard, v_Labels, h_Labels);

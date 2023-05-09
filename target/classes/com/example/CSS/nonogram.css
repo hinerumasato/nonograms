@@ -1,15 +1,21 @@
-#v_label_1,#v_label_2,#v_label_3,#v_label_4,#v_label_5,#v_label_6,#v_label_7,#v_label_8,#v_label_9,#v_label_10 {
-    -fx-border-color: black;
-}
-
-#h_label_1,#h_label_2,#h_label_3,#h_label_4,#h_label_5,#h_label_6,#h_label_7,#h_label_8,#h_label_9,#h_label_10 {
-    -fx-border-color: black;
-}
-
 Button {
     -fx-background-color: white;
-    -fx-border-color: black;
+    /* -fx-border-color: black;
+    -fx-border-width: 0 1 1 0; */
 }
 
+.modern-toggle-button {
+    -fx-background-color: #f2f2f2;
+    -fx-background-radius: 10;
+    -fx-padding: 5 10;
+    -fx-font-size: 14;
+    -fx-border-width: 1;
+    -fx-border-style: solid;
+    -fx-border-color: #cccccc;
+}
 
+.modern-toggle-button:selected {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: #ffffff;
+}
 

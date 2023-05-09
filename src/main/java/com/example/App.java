@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
 import com.example.models.ImgFile;
+import com.example.views.TestView;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +29,7 @@ public class App extends Application {
             FXMLLoader loader = new FXMLLoader(new FXMLFile("menu").URLLoad());
 
             Scene scene = new Scene(loader.load());
+            // Scene scene = new Scene(new TestView());
             scene.getStylesheets().add(new CSSFile("menu").load());
             stage.getIcons().add(new Image(new ImgFile("app-icon").load()));
             stage.setTitle(GAME_TITLE);

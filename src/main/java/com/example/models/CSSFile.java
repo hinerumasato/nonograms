@@ -7,6 +7,5 @@ public class CSSFile extends FileModel {
         this.folderName = "css";
         this.extension = ".css";
     }
-
     
 }

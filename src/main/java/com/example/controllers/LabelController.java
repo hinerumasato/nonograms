@@ -11,6 +11,7 @@ public class LabelController {
     private NonogramBoard nonogramBoard;
     private Label[] v_labels;
     private Label[] h_labels;
+    private String labelStyle = "-fx-border-color: #aaa; -fx-border-radius: 5px";
 
     public LabelController(NonogramBoard nonogramBoard, Label[] v_labels, Label[] h_labels) {
         this.nonogramBoard = nonogramBoard;
@@ -28,9 +29,9 @@ public class LabelController {
     private void generateVLabels(Label[] labels, int[][] rules) {
         for(int i = 0; i < rules.length; i++) {
             labels[i] = new Label();
-            labels[i].setPrefSize(70, App.GRID_SIZE / labels.length);
+            labels[i].setPrefSize(Double.MAX_VALUE, App.GRID_SIZE / labels.length);
             labels[i].setAlignment(Pos.CENTER_RIGHT);
-            labels[i].setStyle("-fx-border-color: #000");
+            labels[i].setStyle(labelStyle);
             String labelText = "";
             for(int j = 0; j < rules[i].length; j++) {
                 labelText += rules[i][j] + " ";
@@ -42,9 +43,9 @@ public class LabelController {
     private void generateHLabels(Label[] labels, int[][] rules) {
         for(int i = 0; i < rules.length; i++) {
             labels[i] = new Label();
-            labels[i].setPrefSize(App.GRID_SIZE / labels.length, 70);
+            labels[i].setPrefSize(App.GRID_SIZE / labels.length, Double.MAX_VALUE);
             labels[i].setAlignment(Pos.BOTTOM_CENTER);
-            labels[i].setStyle("-fx-border-color: #000");
+            labels[i].setStyle(labelStyle);
             String labelText = "";
             for(int j = 0; j < rules[i].length; j++) {
                 labelText += rules[i][j] + "\n";

@@ -2,21 +2,23 @@ package com.example.controllers;
 
 import com.example.models.ToggleModel;
 
+import javafx.animation.Animation;
+import javafx.animation.ScaleTransition;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.util.Duration;
 
 public class ToggleController implements InvalidationListener {
     private ToggleModel toggleModel;
     private Label toggleStateLabel;
     private ToggleButton toggleButton;
 
-    public ToggleController(ToggleModel toggleModel, ToggleButton toggleButton, Label toggleStateLabel) {
+    public ToggleController(ToggleModel toggleModel, ToggleButton toggleButton) {
         this.toggleModel = toggleModel;
         this.toggleButton = toggleButton;
         this.toggleButton.setSelected(true);
-        this.toggleStateLabel = toggleStateLabel;
         this.toggleModel.addListener(this);
         this.toggleModel.notifyListeners();
     }
@@ -53,13 +55,23 @@ public class ToggleController implements InvalidationListener {
         });
     }
 
+    private void setToggleOn(ToggleButton toggleButton) {
+        toggleButton.setText("TÔ MÀU");
+        toggleButton.setStyle("-fx-background-color: green; -fx-font-weight:bold; -fx-text-fill: white; -fx-padding: 5 15; -fx-border-color: black; -fx-border-radius: 5;");
+    }
+
+    private void setToggleOff(ToggleButton toggleButton) {
+        toggleButton.setText("ĐÁNH DẤU");
+        toggleButton.setStyle("-fx-background-color: red; -fx-font-weight:bold; -fx-text-fill: white; -fx-padding: 5 15; -fx-border-color: black; -fx-border-radius: 5;");
+    }
+
     @Override
     public void invalidated(Observable observable) {
         if(observable instanceof ToggleModel) {
             ToggleModel model = (ToggleModel) observable;
             if(model.isOn())
-                toggleStateLabel.setText("ĐANG TÔ MÀU");
-            else toggleStateLabel.setText("ĐANG ĐÁNH DẤU");
+                setToggleOn(toggleButton);
+            else setToggleOff(toggleButton);
         }
     }
 

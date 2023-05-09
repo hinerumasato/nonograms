@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import com.example.App;
+import com.example.models.BorderWidth;
 import com.example.models.HeartModel;
 import com.example.models.ImgFile;
 import com.example.models.NonogramBoard;
@@ -50,19 +51,33 @@ public class GridController implements InvalidationListener {
         }
     }
 
+    private void setButtonBorder(Button button, BorderWidth borderModel) {
+        button.setBorder(borderModel.getBorder());
+    }
+
+    private void initializeButtonBorder(Button button, int row, int col) {
+        if (row == 0 && col == 0)
+            setButtonBorder(button, BorderWidth.FULL);
+        else if (row == 0)
+            setButtonBorder(button, BorderWidth.TOP_RIGHT_BOTTOM);
+        else if (col == 0)
+            setButtonBorder(button, BorderWidth.RIGHT_BOTTOM_LEFT);
+        else
+            setButtonBorder(button, BorderWidth.BOTTOM_RIGHT);
+    }
+
     public void initialize() {
         gridPane.setPrefSize(App.GRID_SIZE, App.GRID_SIZE);
         int numRow = nonogramBoard.getNumRows();
         int numCol = nonogramBoard.getNumCols();
-        nonogramBoard.printRowNumbers();
-        nonogramBoard.printColNumbers();
         for (int i = 0; i < numRow; i++) {
             for (int j = 0; j < numCol; j++) {
                 final int row = i;
                 final int col = j;
                 Button button = new Button();
-                button.setPrefSize(App.GRID_SIZE / (double)numRow, App.GRID_SIZE / (double)numCol);
+                button.setPrefSize(App.GRID_SIZE / (double) numRow, App.GRID_SIZE / (double) numCol);
                 button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                initializeButtonBorder(button, row, col);
 
                 button.setOnMousePressed(event -> {
                     buttonHandle(row, col);
@@ -92,9 +107,9 @@ public class GridController implements InvalidationListener {
                     String markFilePath = new ImgFile("x_mark_2").load();
                     buttons[row][col].setStyle(
                             "-fx-background-image:  url('" + markFilePath + "');" +
-                            "-fx-background-size:  contain; " +
-                            "-fx-background-repeat:  no-repeat; " +
-                            "-fx-background-position: center");
+                                    "-fx-background-size:  contain; " +
+                                    "-fx-background-repeat:  no-repeat; " +
+                                    "-fx-background-position: center");
                 }
 
                 catch (Exception e) {
