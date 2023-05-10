@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.example.App;
 import com.example.models.BorderWidth;
+import com.example.models.GameResultChecker;
 import com.example.models.HeartModel;
 import com.example.models.ImgFile;
 import com.example.models.NonogramBoard;
@@ -58,6 +59,15 @@ public class GridController implements InvalidationListener {
             nonogramBoard.setGridState(row, col, realCellValue);
             heartModel.minusOne();
         }
+        checkGameResult();
+    }
+
+    private void checkGameResult() {
+        GameResultChecker checker = new GameResultChecker(nonogramBoard, heartModel);
+        if(checker.isWin())
+            showDialog(GameResultChecker.WIN_TITLE, GameResultChecker.WIN_TITLE, "Bạn có muốn chơi lại?");
+        if(checker.isLose())                        
+            showDialog(GameResultChecker.LOSE_TITLE, GameResultChecker.LOSE_CONTENT, "Bạn có muốn chơi lại?");
     }
 
     private void setButtonBorder(Button button, BorderWidth borderModel) {
@@ -75,14 +85,6 @@ public class GridController implements InvalidationListener {
             setButtonBorder(button, BorderWidth.RIGHT_BOTTOM_LEFT);
         else
             setButtonBorder(button, BorderWidth.BOTTOM_RIGHT);
-    }
-
-    private boolean isWin() {
-        return nonogramBoard.checkWinGame();
-    }
-
-    private boolean isOver() {
-        return heartModel.checkLoseGame();
     }
 
     public void reinitializeGame() {
@@ -121,10 +123,6 @@ public class GridController implements InvalidationListener {
 
                 button.setOnMousePressed(event -> {
                     buttonHandle(row, col);
-                    if(isWin())
-                        showDialog("Chúc Mừng !!!", "Bạn đã thắng trò chơi", "Bạn có muốn chơi lại?");
-                    if(isOver())
-                        showDialog("Rất tiếc !!!", "Bạn đã hết số lần chơi", "Bạn có muốn chơi lại?");
                 });
 
                 GridPane.setHgrow(button, Priority.ALWAYS);

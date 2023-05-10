@@ -91,7 +91,7 @@ public class NonogramBoard implements Observable, InvalidationListener {
         return result;
     }
 
-    public boolean checkWinGame() {
+    public boolean isGridStateHaveNoFreeValue() {
         for (int i = 0; i < gridState.length; i++)
             for (int j = 0; j < gridState[i].length; j++)
                 if (gridState[i][j] == NonogramBoard.FREE_VALUE)

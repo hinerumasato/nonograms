@@ -44,7 +44,7 @@ public class HeartModel implements Observable {
         notifyAllListeners();
     }
 
-    public boolean checkLoseGame() {
+    public boolean isQuantityEqualZero() {
         return getQuantity() == 0;
     }
 
