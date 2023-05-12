@@ -65,13 +65,13 @@ public class GridController implements InvalidationListener {
     private void checkGameResult() {
         GameResultChecker checker = new GameResultChecker(nonogramBoard, heartModel);
         if(checker.isWin())
-            showDialog(GameResultChecker.WIN_TITLE, GameResultChecker.WIN_TITLE, "Bạn có muốn chơi lại?");
+            showDialog(GameResultChecker.WIN_TITLE, GameResultChecker.WIN_CONTENT, "Bạn có muốn chơi lại?");
         if(checker.isLose())                        
             showDialog(GameResultChecker.LOSE_TITLE, GameResultChecker.LOSE_CONTENT, "Bạn có muốn chơi lại?");
     }
 
-    private void setButtonBorder(Button button, BorderWidth borderModel) {
-        button.setBorder(borderModel.getBorder());
+    private void setButtonBorder(Button button, BorderWidth borderWidth) {
+        button.setBorder(borderWidth.getBorder());
     }
 
     private void initializeGridButton(Button button, int row, int col) {

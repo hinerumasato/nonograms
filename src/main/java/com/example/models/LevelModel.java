@@ -5,7 +5,7 @@ public enum LevelModel {
     MEDIUM(10),
     HARD(15);
 
-    private final int size;
+    private int size;
 
     LevelModel(int size) {
         this.size = size;

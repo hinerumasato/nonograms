@@ -12,7 +12,7 @@ public enum BorderWidth {
     FULL(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(1, 1, 1, 1)))),
     RIGHT_BOTTOM_LEFT(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, null, new BorderWidths(0, 1, 1, 1))));
 
-    private final Border border;
+    private Border border;
 
     BorderWidth(Border border) {
         this.border = border;

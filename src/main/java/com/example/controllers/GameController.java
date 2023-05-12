@@ -1,11 +1,5 @@
-package com.example.views;
+package com.example.controllers;
 
-import com.example.controllers.GridController;
-import com.example.controllers.BoxController;
-import com.example.controllers.ImageViewController;
-import com.example.controllers.LabelController;
-import com.example.controllers.MenuController;
-import com.example.controllers.ToggleController;
 import com.example.models.HeartModel;
 import com.example.models.LevelModel;
 import com.example.models.NonogramBoard;
@@ -21,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class GameView {
+public class GameController {
 
     @FXML
     private GridPane gridPane;
