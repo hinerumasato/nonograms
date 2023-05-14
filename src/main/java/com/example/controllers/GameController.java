@@ -4,7 +4,6 @@ import com.example.models.HeartModel;
 import com.example.models.LevelModel;
 import com.example.models.NonogramBoard;
 import com.example.models.NonogramGenerator;
-import com.example.models.RandomGenerator;
 import com.example.models.ToggleModel;
 
 import javafx.fxml.FXML;

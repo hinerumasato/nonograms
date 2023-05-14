@@ -11,9 +11,7 @@ import com.example.models.FileGenerator;
 import com.example.models.ImgFile;
 import com.example.models.LevelButton;
 import com.example.models.LevelButtonManagement;
-import com.example.models.LevelModel;
 import com.example.models.NonogramGenerator;
-import com.example.models.RandomGenerator;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
