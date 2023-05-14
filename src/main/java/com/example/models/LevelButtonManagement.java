@@ -2,6 +2,7 @@ package com.example.models;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class LevelButtonManagement {
@@ -37,7 +38,8 @@ public class LevelButtonManagement {
         String[] listFile = file.list();
 
         sortListFile(listFile);
-        
+        System.out.println(Arrays.toString(listFile));
+
         for(int i = 0; i < listFile.length; i++) {
             String fileName = formatFileName(listFile[i]);
             LevelButton levelButton = new LevelButton(new MapFile(fileName).load(), LevelButton.PREFIX + (i + 1));

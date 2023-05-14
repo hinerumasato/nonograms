@@ -67,10 +67,6 @@ public class MenuController implements Initializable {
         try {
             gameStage = new Stage();
             FXMLLoader loader = new FXMLLoader(new FXMLFile("game").URLLoad());
-
-            if(level.equals(LevelModel.HARD))
-                App.setGRID_SIZE(420);
-            else App.setGRID_SIZE(290);
             
             GameController gameController = new GameController();
             gameController.setLevelModel(level);
@@ -78,7 +74,7 @@ public class MenuController implements Initializable {
             gameController.setGenerator(new NonogramGenerator(new RandomGenerator(level.getSize(), level.getSize())));
             loader.setController(gameController);
 
-            Scene scene = new Scene(loader.load(), App.APP_SIZE, App.APP_SIZE);
+            Scene scene = new Scene(loader.load(), App.APP_WIDTH, App.APP_HEIGHT);
             scene.getStylesheets().add(new CSSFile("nonogram").load());
 
 

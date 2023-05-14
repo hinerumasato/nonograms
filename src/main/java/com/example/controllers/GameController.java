@@ -1,5 +1,6 @@
 package com.example.controllers;
 
+import com.example.App;
 import com.example.models.HeartModel;
 import com.example.models.LevelModel;
 import com.example.models.NonogramBoard;
@@ -54,6 +55,10 @@ public class GameController {
         try {
             nonogramBoard = generator.generate();
 
+            if(nonogramBoard.getNumCols() == LevelModel.HARD.getSize())
+                App.setGRID_SIZE(420);
+            else App.setGRID_SIZE(290);
+
             toggleModel = new ToggleModel(true);
             toggleModel.addListener(nonogramBoard);
             heartModel = new HeartModel(HeartModel.DEFAULT_QUANTITY);
@@ -91,5 +96,9 @@ public class GameController {
 
     public void setGenerator(NonogramGenerator generator) {
         this.generator = generator;
+    }
+
+    public NonogramBoard getNonogramBoard() {
+        return this.nonogramBoard;
     }
 }

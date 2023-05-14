@@ -19,7 +19,8 @@ public class App extends Application {
 
     public static final String GAME_TITLE = "NONOGRAM";
     public static int GRID_SIZE     = 290;
-    public static int APP_SIZE = GRID_SIZE + 300;
+    public static int APP_WIDTH = GRID_SIZE + 200;
+    public static int APP_HEIGHT = GRID_SIZE + 300;
 
 
     @Override
@@ -47,7 +48,8 @@ public class App extends Application {
 
     public static void setGRID_SIZE(int gRID_SIZE) {
         GRID_SIZE = gRID_SIZE;
-        APP_SIZE = GRID_SIZE + 300;
+        APP_WIDTH = GRID_SIZE + 250;
+        APP_HEIGHT = GRID_SIZE + 300;
     }
 
 }

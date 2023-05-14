@@ -65,8 +65,8 @@ public class LevelSelectController implements Initializable {
             GameController gameController = new GameController();
             gameController.setGenerator(new NonogramGenerator(new FileGenerator(mapPath)));
             loader.setController(gameController);
-
-            Scene scene = new Scene(loader.load(), App.APP_SIZE, App.APP_SIZE);
+            
+            Scene scene = new Scene(loader.load(), App.APP_WIDTH, App.APP_HEIGHT);
             scene.getStylesheets().add(new CSSFile("nonogram").load());
 
 
