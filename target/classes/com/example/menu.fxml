@@ -38,7 +38,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="48.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="243.0" style="-fx-background-color: #cf6777;" text="Chơi mới" textFill="WHITE">
+      <Button fx:id="newGameButton" layoutX="48.0" layoutY="145.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="243.0" style="-fx-background-color: #cf6777;" text="Chơi mới" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -46,7 +46,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="48.0" layoutY="189.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="243.0" text="Chơi tiếp">
+      <Button fx:id="continueGameButton" layoutX="48.0" layoutY="189.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="243.0" text="Chơi tiếp">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

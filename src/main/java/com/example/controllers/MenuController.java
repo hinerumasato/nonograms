@@ -9,6 +9,8 @@ import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
 import com.example.models.ImgFile;
 import com.example.models.LevelModel;
+import com.example.models.NonogramGenerator;
+import com.example.models.RandomGenerator;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +31,14 @@ public class MenuController implements Initializable {
     @FXML
     private Button hardButton;
 
+    @FXML
+    private Button newGameButton;
+
+    @FXML
+    private Button continueGameButton;
+
     private Stage gameStage;
+    private Stage levelSelectStage;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -43,6 +52,10 @@ public class MenuController implements Initializable {
 
         hardButton.setOnAction(event -> {
             loadGame(LevelModel.HARD);
+        });
+
+        newGameButton.setOnAction(event -> {
+            loadLevelSelect();
         });
     }
 
@@ -62,6 +75,7 @@ public class MenuController implements Initializable {
             GameController gameController = new GameController();
             gameController.setLevelModel(level);
             gameController.setMenuController(this);
+            gameController.setGenerator(new NonogramGenerator(new RandomGenerator(level.getSize(), level.getSize())));
             loader.setController(gameController);
 
             Scene scene = new Scene(loader.load(), App.APP_SIZE, App.APP_SIZE);
@@ -74,6 +88,24 @@ public class MenuController implements Initializable {
             gameStage.show();
 
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLevelSelect() {
+        try {
+            levelSelectStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(new FXMLFile("level").URLLoad());
+            Scene scene = new Scene(loader.load());
+
+            scene.getStylesheets().add(new CSSFile("level").load());
+
+            levelSelectStage.setScene(scene);
+            levelSelectStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
+            levelSelectStage.show();
+        }
+
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

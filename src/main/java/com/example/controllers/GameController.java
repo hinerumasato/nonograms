@@ -46,13 +46,13 @@ public class GameController {
     private MenuController menuController;
     
     private NonogramBoard nonogramBoard;
+    private NonogramGenerator generator;
     private HeartModel heartModel;
     private ToggleModel toggleModel;
     private LevelModel level;
 
     public void initialize() {
         try {
-            NonogramGenerator generator = new NonogramGenerator(new RandomGenerator(level.getSize(), level.getSize()));
             nonogramBoard = generator.generate();
 
             toggleModel = new ToggleModel(true);
@@ -60,8 +60,8 @@ public class GameController {
             heartModel = new HeartModel(HeartModel.DEFAULT_QUANTITY);
 
             ImageView[] imageViews = new ImageView[] { imageView1, imageView2, imageView3 };
-            Label[] v_Labels = new Label[level.getSize()];
-            Label[] h_Labels = new Label[level.getSize()];
+            Label[] v_Labels = new Label[nonogramBoard.getBoard().length];
+            Label[] h_Labels = new Label[nonogramBoard.getBoard()[0].length];
 
             this.toggleController = new ToggleController(toggleModel, toggleButton);
             this.gridController = new GridController(gridPane, nonogramBoard, heartModel, menuController);
@@ -88,5 +88,9 @@ public class GameController {
     
     public void setLevelModel(LevelModel level) {
         this.level = level;
+    }
+
+    public void setGenerator(NonogramGenerator generator) {
+        this.generator = generator;
     }
 }
