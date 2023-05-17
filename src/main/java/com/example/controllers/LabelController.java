@@ -1,15 +1,17 @@
 package com.example.controllers;
 
+import com.example.App;
 import com.example.models.NonogramBoard;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
 public class LabelController {
     
-
     private NonogramBoard nonogramBoard;
     private Label[] v_labels;
     private Label[] h_labels;
+    private String labelStyle = "-fx-border-color: #aaa; -fx-border-radius: 5px";
 
     public LabelController(NonogramBoard nonogramBoard, Label[] v_labels, Label[] h_labels) {
         this.nonogramBoard = nonogramBoard;
@@ -20,15 +22,33 @@ public class LabelController {
     public void initialize() {
         int[][] rowRules = nonogramBoard.getRowNumbers();
         int[][] colRules = nonogramBoard.getColNumbers();
-        generateLabels(v_labels, rowRules, " ");
-        generateLabels(h_labels, colRules, "\n");
+        generateHLabels(h_labels, colRules);
+        generateVLabels(v_labels, rowRules);
     }
 
-    private void generateLabels(Label[] labels, int[][] rules, String seperator) {
+    private void generateVLabels(Label[] labels, int[][] rules) {
         for(int i = 0; i < rules.length; i++) {
+            labels[i] = new Label();
+            labels[i].setPrefSize(Double.MAX_VALUE, App.GRID_SIZE / labels.length);
+            labels[i].setAlignment(Pos.CENTER_RIGHT);
+            labels[i].setStyle(labelStyle);
             String labelText = "";
             for(int j = 0; j < rules[i].length; j++) {
-                labelText += rules[i][j] + seperator;
+                labelText += rules[i][j] + " ";
+            }
+            labels[i].setText(labelText);
+        }
+    }
+
+    private void generateHLabels(Label[] labels, int[][] rules) {
+        for(int i = 0; i < rules.length; i++) {
+            labels[i] = new Label();
+            labels[i].setPrefSize(App.GRID_SIZE / labels.length, Double.MAX_VALUE);
+            labels[i].setAlignment(Pos.BOTTOM_CENTER);
+            labels[i].setStyle(labelStyle);
+            String labelText = "";
+            for(int j = 0; j < rules[i].length; j++) {
+                labelText += rules[i][j] + "\n";
             }
             labels[i].setText(labelText);
         }

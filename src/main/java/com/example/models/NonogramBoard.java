@@ -32,9 +32,19 @@ public class NonogramBoard implements Observable, InvalidationListener {
         this.colNumbers = colNumbers;
         this.board = board;
         this.gridState = new int[numRows][numCols];
-        for(int i = 0; i < gridState.length; i++)
-            for(int j = 0; j < gridState[i].length; j++)
+        initGridState();
+    }
+
+    public void initGridState() {
+        for (int i = 0; i < gridState.length; i++)
+            for (int j = 0; j < gridState[i].length; j++)
                 gridState[i][j] = NonogramBoard.FREE_VALUE;
+    }
+
+    public void reinitGridState() {
+        for (int i = 0; i < gridState.length; i++)
+            for (int j = 0; j < gridState[i].length; j++)
+                setGridState(i, j, NonogramBoard.FREE_VALUE);
     }
 
     public int getNumRows() {
@@ -68,38 +78,46 @@ public class NonogramBoard implements Observable, InvalidationListener {
         int[] rowBoard = board[row];
         int[] rowState = gridState[row];
 
-        for(int i = 0; i < rowBoard.length; i++)
-            if(rowBoard[i] == 1 && rowBoard[i] != rowState[i])
+        for (int i = 0; i < rowBoard.length; i++)
+            if (rowBoard[i] == 1 && rowBoard[i] != rowState[i])
                 return false;
         return true;
     }
 
     private int[] colToArray(int col, int[][] matrix) {
         int[] result = new int[matrix[0].length];
-        for(int i = 0; i < result.length; i++)
+        for (int i = 0; i < result.length; i++)
             result[i] = matrix[i][col];
         return result;
+    }
+
+    public boolean isGridStateHaveNoFreeValue() {
+        for (int i = 0; i < gridState.length; i++)
+            for (int j = 0; j < gridState[i].length; j++)
+                if (gridState[i][j] == NonogramBoard.FREE_VALUE)
+                    return false;
+        return true;
     }
 
     public boolean isColFullSquare(int col) {
         int[] colBoard = colToArray(col, board);
         int[] colState = colToArray(col, gridState);
 
-        for(int i = 0; i < colBoard.length; i++)
-            if(colBoard[i] == 1 && colBoard[i] != colState[i])
+        for (int i = 0; i < colBoard.length; i++)
+            if (colBoard[i] == 1 && colBoard[i] != colState[i])
                 return false;
         return true;
     }
 
     public void markFullRow(int row) {
-        for(int i = 0; i < board.length; i++)
-            if(gridState[row][i] == NonogramBoard.FREE_VALUE)
+        for (int i = 0; i < board.length; i++)
+            if (gridState[row][i] == NonogramBoard.FREE_VALUE)
                 setGridState(row, i, NonogramBoard.MARK_VALUE);
     }
 
     public void markFullCol(int col) {
-        for(int i = 0; i < board[0].length; i++)
-            if(gridState[i][col] == NonogramBoard.FREE_VALUE)
+        for (int i = 0; i < board[0].length; i++)
+            if (gridState[i][col] == NonogramBoard.FREE_VALUE)
                 setGridState(i, col, NonogramBoard.MARK_VALUE);
     }
 

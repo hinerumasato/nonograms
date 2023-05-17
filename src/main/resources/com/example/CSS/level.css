@@ -1,0 +1,21 @@
+#title{
+
+}
+#paneLevel{
+    -fx-background-color: #8fbc837d;
+}
+#buttonLevel{
+    -fx-background-color:transparent;
+    -fx-text-fill: #121111;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-background-image : url(../img/background-button-level.png);
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
+}
+#buttonBack{
+    -fx-background-color: #c6a823c4;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+}
