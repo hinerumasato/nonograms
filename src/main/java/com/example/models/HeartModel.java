@@ -70,15 +70,15 @@ public class HeartModel implements Observable {
     }
 
     @Override
-    public void addListener(InvalidationListener arg0) {
-        if(!listeners.contains(arg0))
-            listeners.add(arg0);
+    public void addListener(InvalidationListener listener) {
+        if(!listeners.contains(listener))
+            listeners.add(listener);
     }
 
     @Override
-    public void removeListener(InvalidationListener arg0) {
-        if(listeners.contains(arg0))
-            listeners.remove(arg0);
+    public void removeListener(InvalidationListener listener) {
+        if(listeners.contains(listener))
+            listeners.remove(listener);
     }
 
     public void notifyAllListeners() {
