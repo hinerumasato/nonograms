@@ -38,7 +38,6 @@ public class LevelButtonManagement {
         String[] listFile = file.list();
 
         sortListFile(listFile);
-        System.out.println(Arrays.toString(listFile));
 
         for(int i = 0; i < listFile.length; i++) {
             String fileName = formatFileName(listFile[i]);

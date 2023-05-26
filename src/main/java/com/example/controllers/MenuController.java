@@ -1,16 +1,21 @@
 package com.example.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import com.example.App;
 import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
+import com.example.models.FromSaveFileGenerator;
+import com.example.models.HeartModel;
 import com.example.models.ImgFile;
 import com.example.models.LevelModel;
 import com.example.models.NonogramGenerator;
 import com.example.models.RandomGenerator;
+import com.example.models.SaveFile;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,8 +42,7 @@ public class MenuController implements Initializable {
     @FXML
     private Button continueGameButton;
 
-    private Stage gameStage;
-    private Stage levelSelectStage;
+    private Stage loadStage;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -57,20 +61,25 @@ public class MenuController implements Initializable {
         newGameButton.setOnAction(event -> {
             loadLevelSelect();
         });
+
+        continueGameButton.setOnAction(event -> {
+            loadFromSaveFile();
+        });
     }
 
     public void closeGame() {
-        gameStage.close();
+        loadStage.close();
     }
 
     private void loadGame(LevelModel level) {
         try {
-            gameStage = new Stage();
+            loadStage = new Stage();
             FXMLLoader loader = new FXMLLoader(new FXMLFile("game").URLLoad());
             
             GameController gameController = new GameController();
             gameController.setLevelModel(level);
             gameController.setMenuController(this);
+            gameController.setHeartModel(new HeartModel(HeartModel.DEFAULT_QUANTITY));
             gameController.setGenerator(new NonogramGenerator(new RandomGenerator(level.getSize(), level.getSize())));
             loader.setController(gameController);
 
@@ -78,10 +87,10 @@ public class MenuController implements Initializable {
             scene.getStylesheets().add(new CSSFile("nonogram").load());
 
 
-            gameStage.setScene(scene);
-            gameStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
-            gameStage.setResizable(true);
-            gameStage.show();
+            loadStage.setScene(scene);
+            loadStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
+            loadStage.setResizable(true);
+            loadStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,20 +99,52 @@ public class MenuController implements Initializable {
 
     private void loadLevelSelect() {
         try {
-            levelSelectStage = new Stage();
+            loadStage = new Stage();
             FXMLLoader loader = new FXMLLoader(new FXMLFile("level").URLLoad());
             Scene scene = new Scene(loader.load());
 
             scene.getStylesheets().add(new CSSFile("level").load());
 
-            levelSelectStage.setScene(scene);
-            levelSelectStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
-            levelSelectStage.show();
+            loadStage.setScene(scene);
+            loadStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
+            loadStage.show();
         }
 
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    private void loadFromSaveFile() {
+
+        try {
+            File file = new File(new SaveFile("save").URILoad());
+            Scanner scanner = new Scanner(file);
+            int heartQuantity = scanner.nextInt();
+            scanner.close();
+
+            loadStage = new Stage();
+            FXMLLoader loader = new FXMLLoader(new FXMLFile("game").URLLoad());
+            GameController gameController = new GameController();
+
+            gameController.setGenerator(new NonogramGenerator(new FromSaveFileGenerator()));
+            gameController.setMenuController(this);
+            gameController.setHeartModel(new HeartModel(heartQuantity));
+
+            loader.setController(gameController);
+
+            Scene scene;
+            scene = new Scene(loader.load(), App.APP_WIDTH, App.APP_HEIGHT);
+            scene.getStylesheets().add(new CSSFile("nonogram").load());
+
+            loadStage.setScene(scene);
+            loadStage.getIcons().add(new Image(new ImgFile("app-icon").load()));
+            loadStage.setResizable(true);
+            loadStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
 }

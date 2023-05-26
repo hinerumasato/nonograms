@@ -27,6 +27,15 @@ public class GridController implements InvalidationListener {
 
     private MenuController menuController;
 
+    private final String markFilePath = new ImgFile("x_mark_2").load();
+    private final String noBackgroundStyle = "-fx-background-color: #fff";
+    private final String squareBackgroundStyle = "-fx-background-color: #555";
+    private final String markBackgroundStyle = "-fx-background-image:  url('" + markFilePath + "');" +
+                                "-fx-background-size:  contain; " +
+                                "-fx-background-repeat:  no-repeat; " +
+                                "-fx-background-position: center";
+
+
     public GridController(GridPane gridPane, NonogramBoard nonogramBoard, HeartModel heartModel, MenuController menuController) {
         this.gridPane = gridPane;
         this.nonogramBoard = nonogramBoard;
@@ -75,8 +84,15 @@ public class GridController implements InvalidationListener {
     }
 
     private void initializeGridButton(Button button, int row, int col) {
-        String noBackgroundStyle = "-fx-background-color: #fff";
-        button.setStyle(noBackgroundStyle);
+
+        int value = nonogramBoard.getGridState(row, col);
+        if(value == NonogramBoard.FREE_VALUE)
+            button.setStyle(noBackgroundStyle);
+        else if(value == NonogramBoard.SQUARE_VALUE)
+            button.setStyle(squareBackgroundStyle);
+        else button.setStyle(markBackgroundStyle);
+
+
         if (row == 0 && col == 0)
             setButtonBorder(button, BorderWidth.FULL);
         else if (row == 0)
@@ -143,15 +159,10 @@ public class GridController implements InvalidationListener {
 
             if (value == NonogramBoard.SQUARE_VALUE)
                 buttons[row][col]
-                        .setStyle("-fx-background-color: #555");
+                        .setStyle(squareBackgroundStyle);
             else if(value == NonogramBoard.MARK_VALUE) {
                 try {
-                    String markFilePath = new ImgFile("x_mark_2").load();
-                    buttons[row][col].setStyle(
-                            "-fx-background-image:  url('" + markFilePath + "');" +
-                                    "-fx-background-size:  contain; " +
-                                    "-fx-background-repeat:  no-repeat; " +
-                                    "-fx-background-position: center");
+                    buttons[row][col].setStyle(markBackgroundStyle);
                 }
 
                 catch (Exception e) {

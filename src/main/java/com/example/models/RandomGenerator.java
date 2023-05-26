@@ -1,7 +1,5 @@
 package com.example.models;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class RandomGenerator extends Generator implements GeneratorBehavior {
@@ -42,68 +40,6 @@ public class RandomGenerator extends Generator implements GeneratorBehavior {
                 for (int j = 0; j < numCols; j++)
                     board[i][j] = rand.nextInt(2);
         }
-    }
-
-    public void generateColConstraints() {
-        for(int i = 0; i < numRows; i++) {
-            List<Integer> colConstraint = new ArrayList<Integer>();
-            int count = 0;
-            for(int j = 0; j < numCols; j++)
-                if(board[j][i] == 1) {
-                    count++;
-                    if(j == numCols - 1) {
-                        colConstraint.add(count);
-                        count = 0;
-                    }
-                }
-            else {
-                if(count != 0) {
-                    colConstraint.add(count);
-                    count = 0;
-                }
-            }
-
-            if(count == numRows) {
-                colConstraint.add(count);
-                count = 0;
-            }
-
-            int[] result = new int[colConstraint.size()];
-            for(int j = 0; j < result.length; j++)
-                result[j] = colConstraint.get(j);
-            colConstraints[i] = result;
-        }
-    }
-
-    public void generateRowConstraints() {
-        for (int i = 0; i < numRows; i++) {
-            List<Integer> rowConstraint = new ArrayList<Integer>();
-            int count = 0;
-            for (int j = 0; j < numCols; j++)
-                if (board[i][j] == 1) {
-                    count++;
-                    if (j == numCols - 1) {
-                        rowConstraint.add(count);
-                        count = 0;
-                    }
-                } else {
-                    if (count != 0) {
-                        rowConstraint.add(count);
-                        count = 0;
-                    }
-                }
-
-            if (count == numRows) {
-                rowConstraint.add(count);
-                count = 0;
-            }
-
-            int[] result = new int[rowConstraint.size()];
-            for (int j = 0; j < result.length; j++)
-                result[j] = rowConstraint.get(j);
-            rowConstraints[i] = result;
-        }
-
     }
 
     private void generateFull(int[] arr) {

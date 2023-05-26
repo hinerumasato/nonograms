@@ -11,7 +11,7 @@ public class NonogramBoard implements Observable, InvalidationListener {
 
     public static final int SQUARE_VALUE = 1;
     public static final int MARK_VALUE = 0;
-    public static final int FREE_VALUE = -1;
+    public static final int FREE_VALUE = 2;
 
     private int numRows;
     private int numCols;
@@ -33,6 +33,15 @@ public class NonogramBoard implements Observable, InvalidationListener {
         this.board = board;
         this.gridState = new int[numRows][numCols];
         initGridState();
+    }
+
+    public NonogramBoard(int numRows, int numCols, int[][] rowNumbers, int[][] colNumbers, int[][] gridState, int[][] board) {
+        this.numRows = numRows;
+        this.numCols = numCols;
+        this.rowNumbers = rowNumbers;
+        this.colNumbers = colNumbers;
+        this.gridState = gridState;
+        this.board = board;
     }
 
     public void initGridState() {

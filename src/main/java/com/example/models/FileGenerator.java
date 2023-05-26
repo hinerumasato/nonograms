@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class FileGenerator extends Generator implements GeneratorBehavior {
 
-    protected String mapPath;
+    private String mapPath;
 
     public FileGenerator(String mapPath) {
         this.mapPath = mapPath;
@@ -41,10 +41,10 @@ public class FileGenerator extends Generator implements GeneratorBehavior {
             numRows = board.length;
             numCols = board[0].length;
 
-            RandomGeneratorAdapter adapter = new RandomGeneratorAdapter(mapPath, numCols, numRows, board);
-
-            rowConstraints = adapter.generateRowRules();
-            colConstraints = adapter.generateColRules();
+            this.rowConstraints = new int[numRows][];
+            this.colConstraints = new int[numCols][];
+            generateRowConstraints();
+            generateColConstraints();
 
 
             scanner.close();

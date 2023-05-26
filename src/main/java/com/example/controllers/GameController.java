@@ -1,14 +1,20 @@
 package com.example.controllers;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.example.App;
 import com.example.models.HeartModel;
 import com.example.models.LevelModel;
 import com.example.models.NonogramBoard;
 import com.example.models.NonogramGenerator;
+import com.example.models.SaveFile;
 import com.example.models.ToggleModel;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -38,6 +44,9 @@ public class GameController {
     @FXML
     private VBox vBox;
 
+    @FXML
+    private MenuItem saveMenuItem;
+
     private LabelController labelController;
     private ToggleController toggleController;
     private GridController gridController;
@@ -61,7 +70,6 @@ public class GameController {
 
             toggleModel = new ToggleModel(true);
             toggleModel.addListener(nonogramBoard);
-            heartModel = new HeartModel(HeartModel.DEFAULT_QUANTITY);
 
             ImageView[] imageViews = new ImageView[] { imageView1, imageView2, imageView3 };
             Label[] v_Labels = new Label[nonogramBoard.getBoard().length];
@@ -79,9 +87,47 @@ public class GameController {
             labelController.initialize();
             boxController.addHBoxLabels(h_Labels);
             boxController.addVBoxLabels(v_Labels);
+
+            saveMenuItem.setOnAction(event -> {
+                saveGame();
+            });
         }
 
         catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void saveGame() {
+        try {
+            int heartQuantity = heartModel.getQuantity();
+            int[][] gridState = nonogramBoard.getGridState();
+            int[][] board = nonogramBoard.getBoard();
+    
+            File file = new File(new SaveFile("save").URILoad());
+            FileWriter fileWriter = new FileWriter(file);
+
+            String content = "";
+            content += heartQuantity + "\n";
+            content += "\n";
+            for(int i = 0; i < gridState.length; i++) {
+                String row = "";
+                for(int j = 0; j < gridState[i].length; j++)
+                    row += gridState[i][j] + " ";
+                content += row.trim() + "\n";
+            }
+
+            content += "\n";
+            for(int i = 0; i < board.length; i++) {
+                String row = "";
+                for(int j = 0; j < board[i].length; j++)
+                    row += board[i][j] + " ";
+                content += row.trim() + "\n";
+            }
+            
+            fileWriter.append(content);
+            fileWriter.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -101,4 +147,10 @@ public class GameController {
     public NonogramBoard getNonogramBoard() {
         return this.nonogramBoard;
     }
+
+    public void setHeartModel(HeartModel heartModel) {
+        this.heartModel = heartModel;
+    }
+
+    
 }

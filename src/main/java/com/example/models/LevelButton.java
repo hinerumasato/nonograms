@@ -3,13 +3,14 @@ package com.example.models;
 public class LevelButton {
     private String mapPath;
     private String title;
-
-
+    
+    
+    private static String backgroundURL = new ImgFile("background-button-level-2").load();
     public static final String CSS_STYLE = "-fx-background-color:transparent;" +
                                             "-fx-text-fill: #121111;" +
                                             "-fx-font-weight: bold;" +
                                             "-fx-background-radius: 15;" +
-                                            "-fx-background-image : url(" + new ImgFile("background-button-level").load() + ");" +
+                                            "-fx-background-image : url(" + backgroundURL + ");" +
                                             "-fx-background-position: center;" +
                                             "-fx-background-repeat: no-repeat;" +
                                             "-fx-background-size: contain;" +

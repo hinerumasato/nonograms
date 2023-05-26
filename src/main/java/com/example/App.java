@@ -22,6 +22,12 @@ public class App extends Application {
     public static int APP_WIDTH = GRID_SIZE + 200;
     public static int APP_HEIGHT = GRID_SIZE + 300;
 
+    public static void setGRID_SIZE(int gRID_SIZE) {
+        GRID_SIZE = gRID_SIZE;
+        APP_WIDTH = GRID_SIZE + 250;
+        APP_HEIGHT = GRID_SIZE + 300;
+    }
+
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -34,7 +40,7 @@ public class App extends Application {
             stage.getIcons().add(new Image(new ImgFile("app-icon").load()));
             stage.setTitle(GAME_TITLE);
             stage.setScene(scene);
-            stage.setResizable(true);
+            stage.setResizable(false);
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,11 +51,5 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
-    public static void setGRID_SIZE(int gRID_SIZE) {
-        GRID_SIZE = gRID_SIZE;
-        APP_WIDTH = GRID_SIZE + 250;
-        APP_HEIGHT = GRID_SIZE + 300;
-    }
-
+    
 }

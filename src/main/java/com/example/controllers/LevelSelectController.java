@@ -8,6 +8,7 @@ import com.example.App;
 import com.example.models.CSSFile;
 import com.example.models.FXMLFile;
 import com.example.models.FileGenerator;
+import com.example.models.HeartModel;
 import com.example.models.ImgFile;
 import com.example.models.LevelButton;
 import com.example.models.LevelButtonManagement;
@@ -40,8 +41,6 @@ public class LevelSelectController implements Initializable {
             button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
             button.setStyle(LevelButton.CSS_STYLE);
             button.setOnAction(event -> {
-                System.out.println(levelButton.getMapPath());
-                System.out.println(levelButton.getTitle());
                 buttonHandle(levelButton.getMapPath());
             });
             
@@ -64,6 +63,7 @@ public class LevelSelectController implements Initializable {
             
             GameController gameController = new GameController();
             gameController.setGenerator(new NonogramGenerator(new FileGenerator(mapPath)));
+            gameController.setHeartModel(new HeartModel(HeartModel.DEFAULT_QUANTITY));
             loader.setController(gameController);
             
             Scene scene = new Scene(loader.load(), App.APP_WIDTH, App.APP_HEIGHT);

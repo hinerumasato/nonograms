@@ -11,13 +11,16 @@ public class HeartModel implements Observable {
     private String heartFillUrl = new ImgFile("heart").load();
     private String heartOutlineUrl = new ImgFile("heart_outline").load();
     private int quantity;
-    private String[] hearts;
+    private String[] hearts = new String[DEFAULT_QUANTITY];
     private List<InvalidationListener> listeners = new ArrayList<InvalidationListener>();
 
     public HeartModel(int quantity) {
+
+        for(int i = 0; i < hearts.length; i++)
+            hearts[i] = heartOutlineUrl;
+
         this.quantity = quantity;
-        this.hearts = new String[quantity];
-        for (int i = 0; i < hearts.length; i++)
+        for (int i = 0; i < quantity; i++)
             hearts[i] = heartFillUrl;
     }
 
